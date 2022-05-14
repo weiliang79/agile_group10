@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,22 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Role::create([
+            'role_name' => 'Super Admin',
+        ]);
+
+        Role::create([
+            'role_name' => 'Manager',
+        ]);
+
+        Role::create([
+            'role_name' => 'Courier',
+        ]);
+
+        Role::create([
+            'role_name' => 'Normal User',
+        ]);
     }
 
     /**
