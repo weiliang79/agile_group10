@@ -21,3 +21,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-process', [LoginController::class, 'process'])->name('login.process');
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register-process', [LoginController::class, 'registerProcess'])->name('register.process');
+
+Route::get('/ui_example', function () {
+      return view('ui_example.login');
+});
