@@ -23,12 +23,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-<<<<<<< HEAD:database/migrations/2014_10_12_000000_create_users_table.php
-            $table->string('address');
-            $table->rememberToken();
-            $table->timestamps();
-
-=======
             $table->tinyInteger('gender');
             $table->string('phone');
             $table->foreignId("role_id");
@@ -36,7 +30,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
->>>>>>> wei-liang:database/migrations/2022_05_14_111314_create_users_table.php
         });
     }
 

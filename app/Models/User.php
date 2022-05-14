@@ -26,12 +26,8 @@ class User extends Authenticatable
         'postcode',
         'email',
         'password',
-<<<<<<< HEAD
-        'address',
-=======
         'gender',
         'phone',
->>>>>>> wei-liang
     ];
 
     /**
