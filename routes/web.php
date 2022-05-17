@@ -24,3 +24,7 @@ Route::get('/login', function() {
 Route::get('/register', function () {
     return view('register');
 });
+
+Route::get('/senderHomePage', function () {
+    return view('senderHomePage');
+});
