@@ -7,15 +7,19 @@
 
 	<body>
 
+	@if(Session::get('error'))
+	<script type="text/javascript">alert("Wrong E-mail or Password")</script>
+	@endif
+
 		<center>
 			<h3>Login here</h3>
-			<form action ="login.php" method="post"></form> 
-			
+			<form action ="{{ route('login.process') }}" method="POST"> 
+			@csrf
 				<table>
 				  <tr>
-				     <td>Username:</td>
+				     <td>E-mail:</td>
 			             <td>
-					<input type="text" name="user">
+					<input type="text" name="email">
 				     </td>
 				  </tr>
 
@@ -37,6 +41,7 @@
    				  </tr>	
 
 				</table>
+			</form>
 
 		</center>
 
