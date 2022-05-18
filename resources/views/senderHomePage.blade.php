@@ -72,7 +72,6 @@
         background-color: #4287f5;
         color: white;
       }
-
       th,
       td {
         width: 150px;
@@ -80,7 +79,6 @@
         border: 1px solid black;
         padding: 5px;
       }
-
       h2 {
         color: #4287f5;
       }
