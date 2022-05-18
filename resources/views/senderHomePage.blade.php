@@ -21,38 +21,47 @@
   </header>
 
   <main>
-    <h1 class="page-title">Sender's info</h1>
+    <h1 class="page-title">Parcel Info</h1>
     <form class="center">
 
       <div>
-        <label for="sender-name">Sender's name:</label>
-        <input type="text" name="sender-name" id="sender-name" placeholder="Enter name here">
+        <label for="address">Sender address:</label>
+        <input type="text" name="sender-address" id="address" required>
       </div>
       <div>
-        <label for="password">Sender's ID:</label>
-        <input type="text" name="password" id="password" placeholder="Enter password here">
+        <label for="address">Sender postcode:</label>
+        <input type="number" name="sender-postcode" id="address" required>
       </div>
       <div>
-        <label for="recepient">Receipient name:</label>
-        <input type="text" name="recepient-name" id="recepient-name" placeholder="Enter name here">
+        <label for="recepient">Receipient first name:</label>
+        <input type="text" name="recepient-first-name" id="recepient-name" required>
+      </div>
+      <div>
+        <label for="recepient">Receipient last name:</label>
+        <input type="text" name="recepient-last-name" id="recepient-name" required>
       </div>
       <div>
         <label for="address">Receipient address:</label>
-        <input type="text" name="address" id="address" placeholder="Enter address here">
+        <input type="text" name="receipient-address" id="address" required>
+      </div>
+      <div>
+        <label for="address">Receipient postcode:</label>
+        <input type="number" name="receipient-postcode" id="address" required>
+      </div>
+      <div>
+        <label for="address">Receipient phone:</label>
+        <input type="number" name="receipient-postcode" id="address" required>
       </div>
       <div>
         <label for="weight">Package weight:</label>
-        <input type="text" name="weight" id="weight" placeholder="Enter weight here">
-      </div>
-      <div>
-        <label for="ID">Package ID:</label>
-        <input type="text" name="ID" id="ID" placeholder="Enter ID here">
+        <input type="number" name="weight" id="weight" required>
       </div>
 
       <input type="submit" value="Send">
 
     </form>
 
+    {{-- style sheet for table --}}
     <style>
       table {
         border-collapse: separate;
@@ -76,6 +85,7 @@
         color: #4287f5;
       }
     </style>
+
     <div class="parcel-list center">
       <h2>List of parcel status</h2>
       <table>
@@ -105,9 +115,6 @@
         </tr>
       </table>
     </div>
-
-
-
   </main>
 </body>
 
