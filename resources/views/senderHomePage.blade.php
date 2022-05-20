@@ -22,8 +22,8 @@
 
   <main>
     <h1 class="page-title">Parcel Info</h1>
-    <form class="center">
-
+    <form class="center" action="{{ route('parcel.send') }}" method="POST">
+      @csrf
       <div>
         <label for="address">Sender address:</label>
         <input type="text" name="sender-address" id="address" required>
