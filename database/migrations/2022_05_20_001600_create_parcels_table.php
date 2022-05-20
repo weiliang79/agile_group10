@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sender_postcode');
             $table->string('recipient_firstname');
             $table->string('recipient_lastname');
-            $table->string('recipeint_address');
+            $table->string('recipient_address');
             $table->string('recipient_postcode');
             $table->string('recipient_phone');
             $table->foreignId('courier_id')->nullable();
