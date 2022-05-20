@@ -16,6 +16,9 @@ class Parcel_Details extends Model
         'location',
         'message',
         'parcel_id',
-
     ];
+
+    public function parcel(){
+        return $this->belongsTo(Parcel::class);
+    }
 }

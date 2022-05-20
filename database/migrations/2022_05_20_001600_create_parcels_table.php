@@ -15,23 +15,23 @@ return new class extends Migration
     {
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
-            $table->varchar('tracking_number');
+            $table->string('tracking_number');
             $table->double('weight');
-            $table->integer('sender_id');
-            $table->varchar('sender_address');
-            $table->varchar('sender_postcode');
-            $table->varchar('recipient_firstname');
-            $table->varchar('recipient_lastname');
-            $table->varchar('recipeint_address');
-            $table->varchar('recipient_postcode');
-            $table->varchar('recipient_phone');
-            $table->integer('courier_id')->nullable();
+            $table->foreignId('sender_id');
+            $table->string('sender_address');
+            $table->string('sender_postcode');
+            $table->string('recipient_firstname');
+            $table->string('recipient_lastname');
+            $table->string('recipeint_address');
+            $table->string('recipient_postcode');
+            $table->string('recipient_phone');
+            $table->foreignId('courier_id')->nullable();
             $table->integer('status');
-            $table->timestamp('created_time');
-            $table->timestamp('arrived_time');
+            $table->timestamp('arrived_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('courier_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

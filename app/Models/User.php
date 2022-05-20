@@ -54,4 +54,12 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function sender_parcel(){
+        return $this->hasMany(Parcel::class, 'sender_id');
+    }
+
+    public function courier_parcel(){
+        return $this->hasMany(Parcel::class, 'courier_id');
+    }
 }

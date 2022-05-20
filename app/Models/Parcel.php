@@ -27,4 +27,16 @@ class Parcel extends Model
         'created_time',
         'arrived_time',
     ];
+
+    public function details(){
+        return $this->hasMany(Parcel_Details::class);
+    }
+
+    public function sender(){
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function courier(){
+        return $this->belongsTo(User::class, 'courier_id');
+    }
 }

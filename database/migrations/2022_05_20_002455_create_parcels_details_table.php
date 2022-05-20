@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('parcels_details', function (Blueprint $table) {
             $table->id();
             $table->timestamp('time');
-            $table->varchar('location');
+            $table->string('location');
             $table->text('message');
-            $table->integer('parcel_id');
+            $table->foreignId('parcel_id');
             $table->foreign('parcel_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
         });
