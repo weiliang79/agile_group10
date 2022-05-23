@@ -9,6 +9,9 @@
 </head>
 
 <body class="center">
+    @if(Session::get('success'))
+    <script type="text/javascript">alert("{{ Session::get('success') }}")</script>
+    @endif
     <header>
         <h2>Sender Homepage</h2>
 

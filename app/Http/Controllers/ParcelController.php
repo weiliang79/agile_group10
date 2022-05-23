@@ -22,7 +22,7 @@ class ParcelController extends Controller
 
         $currentLoggedInId = Auth::user()->id;
 
-        $parcel = new Parcel;
+        /*$parcel = new Parcel;
         $parcel->tracking_number = 0;
         $parcel->weight = $request->weight;
         $parcel->sender_id = $currentLoggedInId;
@@ -33,11 +33,32 @@ class ParcelController extends Controller
         $parcel->recipient_address = $request->recipient_address;
         $parcel->recipient_postcode = $request->recipient_postcode;
         $parcel->recipient_phone = $request->recipient_phone;
-        $parcel->status = 0;
+        $parcel->status = Parcel::STATUS_PENDING;*/
 
+        //$parcel->save();
+
+        $parcel = Parcel::create([
+            'weight' => $request->weight,
+            'sender_id' => $currentLoggedInId,
+            'sender_address' => $request->sender_address,
+            'sender_postcode' => $request->sender_postcode,
+            'recipient_firstname' => $request->recipient_firstname,
+            'recipient_lastname' => $request->recipient_lastname,
+            'recipient_address' => $request->recipient_address,
+            'recipient_postcode' => $request->recipient_postcode,
+            'recipient_phone' => $request->recipient_phone,
+            'status' => Parcel::STATUS_PENDING,
+        ]);
+
+        $parcel->tracking_number = ParcelController::generateTrackingNumber($parcel->id);
         $parcel->save();
 
         // redirect to homepage
-        return redirect()->route('root');
+        return redirect()->route('root')->with('success', 'Parcel details successfully saved.');
     }
+
+    function generateTrackingNumber($parcelId){
+        return '#' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
+    }
+
 }

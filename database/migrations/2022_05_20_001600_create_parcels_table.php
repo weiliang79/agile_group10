@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
-            $table->string('tracking_number');
+            $table->string('tracking_number')->nullable();
             $table->double('weight');
             $table->foreignId('sender_id');
             $table->string('sender_address');

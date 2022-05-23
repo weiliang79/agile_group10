@@ -25,7 +25,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error', "Wrong E-mail or Password! Please Try Again!");
         }
 
-        echo "login success";
+        return redirect()->route('root');
     }
 
     public function register(){
