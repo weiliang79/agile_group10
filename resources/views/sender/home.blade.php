@@ -96,34 +96,31 @@
             }
 
         </style>
-
         <div class="parcel-list center">
             <h2>List of parcel status</h2>
             <table>
                 <tr>
-                    <th>Sender ID</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Age</th>
+                    <th>Tracking Number</th>
+                    <th>Recipient Name</th>
+                    <th>Recipient Address</th>
+                    <th>Recipient Phone</th>
+                    <th>Status</th>
                 </tr>
+                @foreach($parcels as $parcel)
                 <tr>
-                    <td class="td">10001</td>
-                    <td>Tom</td>
-                    <td>M</td>
-                    <td>30</td>
+                    <td>{{ $parcel->tracking_number }}</td>
+                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                    <td>{{ $parcel->recipient_address }}</td>
+                    <td>{{ $parcel->recipient_phone }}</td>
+                    @if($parcel->status == 1)
+                    <td>Pending</td>
+                    @elseif($parcel->status == 2)
+                    <td>Delivering</td>
+                    @elseif($parcel->status == 3)
+                    <td>Delivered</td>
+                    @endif
                 </tr>
-                <tr>
-                    <td class="td">10002</td>
-                    <td>Sally</td>
-                    <td>F</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td class="td">10003</td>
-                    <td>Emma</td>
-                    <td>F</td>
-                    <td>24</td>
-                </tr>
+                @endforeach
             </table>
         </div>
     </main>

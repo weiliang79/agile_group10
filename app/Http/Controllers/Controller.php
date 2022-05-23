@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Parcel;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +20,9 @@ class Controller extends BaseController
     public function root(){
         if (Auth::check()) {
             if(Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')){
-                return view('sender.home');
+                //TODO: sort parrcel status by: pending->delivering->delivered
+                $parcels = Parcel::where('sender_id', Auth::user()->id)->get();
+                return view('sender.home', compact('parcels'));
             } else if(Gate::allows('isCourier')){
                 return view('courier.tracking');
             }
