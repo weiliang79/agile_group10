@@ -24,7 +24,7 @@ class Controller extends BaseController
                 $parcels = Parcel::where('sender_id', Auth::user()->id)->get();
                 return view('sender.home', compact('parcels'));
             } else if(Gate::allows('isCourier')){
-                return view('courier.tracking');
+                return view('courier.home');
             }
             
         } else {

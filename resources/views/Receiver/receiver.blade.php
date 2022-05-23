@@ -24,9 +24,18 @@
         <h1 class="page-title">Tracking Number</h1>
         <form class="center">
 
+            <hr>
+
             <div>
             <label for="tracking">Tracking Number:</label>
             </div>
+
+            <div>
+            <label for="weight">Weight:</label>
+            </div>
+
+
+            <hr>
 
             <div>
             <label for="sender">Sender Name:</label>
@@ -39,6 +48,8 @@
             <div>
             <label for="sender">Sender Postcode:</label>
             </div>
+
+            <hr>
 
             <div>
             <label for="recipient">Receipient Name:</label>
@@ -56,65 +67,18 @@
             <label for="recipient">Receipient Phone:</label>
             </div>
 
+            <hr>
+
+            <div>
+                <label for="recepient">Receiver name:</label>
+                <input type="text" name="receiver_name" id="receiver_name" required>
+            </div>
+
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
 
         </form>
 
-        {{-- style sheet for table --}}
-        <style>
-            table {
-                border-collapse: separate;
-                border-spacing: 20px 0;
-            }
-
-            th {
-                background-color: #4287f5;
-                color: white;
-            }
-
-            th,
-            td {
-                width: 150px;
-                text-align: center;
-                border: 1px solid black;
-                padding: 5px;
-            }
-
-            h2 {
-                color: #4287f5;
-            }
-        </style>
-
-        <div class="parcel-list center">
-            <h2>List of parcel status</h2>
-            <table>
-                <tr>
-                    <th>Sender ID</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Age</th>
-                </tr>
-                <tr>
-                    <td class="td">10001</td>
-                    <td>Tom</td>
-                    <td>M</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td class="td">10002</td>
-                    <td>Sally</td>
-                    <td>F</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td class="td">10003</td>
-                    <td>Emma</td>
-                    <td>F</td>
-                    <td>24</td>
-                </tr>
-            </table>
-        </div>
     </main>
 </body>
 
