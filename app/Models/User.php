@@ -62,4 +62,20 @@ class User extends Authenticatable
     public function courier_parcel(){
         return $this->hasMany(Parcel::class, 'courier_id');
     }
+
+    public function isSuperAdmin(){
+        return $this->role->id == Role::ROLE_SUPER_ADMIN;
+    }
+
+    public function isManager(){
+        return $this->role->id == Role::ROLE_MANAGER;
+    }
+
+    public function isCourier(){
+        return $this->role->id == Role::ROLE_COURIER;
+    }
+
+    public function isNormalUser(){
+        return $this->role->id == Role::ROLE_NORMAL_USER;
+    }
 }

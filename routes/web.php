@@ -22,4 +22,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-process', [LoginController::class, 'process'])->name('login.process');
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register-process', [LoginController::class, 'registerProcess'])->name('register.process');
+Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
+
 Route::post('/parcel-send', [ParcelController::class, 'sendParcel'])->name('parcel.send');
