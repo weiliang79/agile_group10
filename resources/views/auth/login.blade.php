@@ -8,7 +8,7 @@
 	<body>
 
 	@if(Session::get('error'))
-	<script type="text/javascript">alert("Wrong E-mail or Password")</script>
+	<script type="text/javascript">alert("{{ Session::get('error') }}")</script>
 	@endif
 
 		<center>
