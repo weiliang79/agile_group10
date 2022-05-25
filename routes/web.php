@@ -25,3 +25,4 @@ Route::post('/register-process', [LoginController::class, 'registerProcess'])->n
 Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
 
 Route::post('/parcel-send', [ParcelController::class, 'sendParcel'])->name('parcel.send');
+Route::post('/parcel-update', [ParcelController::class, 'updateParcel'])->name('parcel.update');

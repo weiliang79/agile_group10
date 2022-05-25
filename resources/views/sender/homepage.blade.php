@@ -64,7 +64,7 @@
             </div>
             <div>
                 <label for="weight">Package weight:</label>
-                <input type="number" name="weight" id="weight" required>
+                <input type="number" name="weight" id="weight" step="0.01" required>
             </div>
 
             <input type="submit" value="Send">

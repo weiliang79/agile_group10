@@ -9,6 +9,9 @@
 </head>     
 
 <body class="center">
+  @if(Session::get('success'))
+	  <script type="text/javascript">alert("{{ Session::get('success') }}")</script>
+	@endif
   <header>
     <h2>Courier Homepage</h2>
 
@@ -22,11 +25,18 @@
 
   <main>
     <h1 class="page-title">Tracking Number</h1>
-    <form class="center">
-
+    @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    <form class="center" action="{{ route('parcel.update') }}" method="POST">
+    @csrf
       <div>
         <label for="tracking">Tracking Number:</label>
-        <input type="text" name="tracking-number" id="number" required>
+        <input type="text" name="tracking_number" id="number" required>
       </div>
       
       <input type="submit" value="Send">
