@@ -67,32 +67,22 @@
     </style>
 
     <div class="parcel-list center">
-      <h2>List of parcel status</h2>
+      <h2>List of parcel in transit</h2>
       <table>
         <tr>
-          <th>Sender ID</th>
-          <th>Name</th>
-          <th>Gender</th>
-          <th>Age</th>
-        </tr>
-        <tr>
-          <td class="td">10001</td>
-          <td>Tom</td>
-          <td>M</td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td class="td">10002</td>
-          <td>Sally</td>
-          <td>F</td>
-          <td>28</td>
-        </tr>
-        <tr>
-          <td class="td">10003</td>
-          <td>Emma</td>
-          <td>F</td>
-          <td>24</td>
-        </tr>
+          <th>Receipient Name</th>
+          <th>Destination</th>
+          <th>Weight (KG)</th>
+          <th>Hours Elapsed</th>
+      </tr>
+      @foreach ($parcels as $parcel)
+          <tr>
+              <td class="td">{{$parcel->tracking_number}}</td>
+              <td>{{$parcel->recipient_address}}</td>
+              <td>{{$parcel->weight}}</td>
+              <td>{{$parcel->elapsed_time}}</td>
+          </tr>
+      @endforeach
       </table>
     </div>
   </main>
