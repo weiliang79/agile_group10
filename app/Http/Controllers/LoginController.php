@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,8 @@ class LoginController extends Controller
             'gender' => $request->gender,
             'phone' => $request->phone,
         ]);
+
+        $user->role()->associate(Role::ROLE_NORMAL_USER);
 
         $user->save();
 
