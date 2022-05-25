@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class ParcelController extends Controller
 {
@@ -17,7 +18,7 @@ class ParcelController extends Controller
             "recipient_address" => "required",
             "recipient_postcode" => "required",
             "recipient_phone" => "required",
-            "weight" => "required",
+            "weight" => "required|numeric",
         ]);
 
         $currentLoggedInId = Auth::user()->id;
@@ -55,6 +56,28 @@ class ParcelController extends Controller
 
         // redirect to homepage
         return redirect()->route('root')->with('success', 'Parcel details successfully saved.');
+    }
+
+    public function updateParcel(Request $request){
+        //dd($request);
+
+        $request->validate([
+            'tracking_number' => 'required|regex:/^[#]/|min:9|max:9',
+        ]);
+
+        $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
+
+        //dd($parcel);
+
+        if($parcel->status == Parcel::STATUS_PENDING){
+            $parcel->status = Parcel::STATUS_DELIVERING;
+            $parcel->save();
+            return redirect()->back()->with('success', 'The parcel '.$parcel->tracking_number.' has updated to delivering status.');
+        } else if($parcel->status == Parcel::STATUS_DELIVERING){
+            //TODO: change status from delivering to delivered
+            dd($parcel);
+        }
+
     }
 
     function generateTrackingNumber($parcelId){
