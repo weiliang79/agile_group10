@@ -27,3 +27,4 @@ Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
 Route::post('/parcel-send', [ParcelController::class, 'sendParcel'])->name('parcel.send');
 Route::post('/parcel-update', [ParcelController::class, 'updateParcel'])->name('parcel.update');
 Route::post('/delivery-screen',[ParcelController::class, 'completeDelivery'])->name('delivery.screen');
+Route::post('/parcel-delivered',[ParcelController::class, 'deliveredParcel'])->name('parcel.delivered');

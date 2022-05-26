@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parcel;
+use App\Models\ParcelDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDO;
@@ -75,13 +76,23 @@ class ParcelController extends Controller
             return redirect()->back()->with('success', 'The parcel '.$parcel->tracking_number.' has updated to delivering status.');
         } else if($parcel->status == Parcel::IN_TRANSIT){
             //TODO: change status from delivering to delivered
-          return view('courier.delivery_screen')->with('parcel_id',$parcel->tracking_number); 
+          return view('courier.delivery_screen')->with('tracking_number',$parcel->tracking_number); 
             dd($parcel);
         }
     }
 
+    public function deliveredParcel(Request $request){
+            //dd(Parcel::STATUS_DELIVERED);     
+        
+            $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
+            $parcel->status =Parcel::STATUS_DELIVERED;
+            $parcel->save();
+            $parcel_details = new ParcelDetails;
+            $parcel_details->recipient_name = $request->receiver_name;
+            $parcel_details->save();
 
 
+    }
 
 
     function generateTrackingNumber($parcelId){

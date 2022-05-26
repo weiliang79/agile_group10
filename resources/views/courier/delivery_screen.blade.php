@@ -22,21 +22,24 @@
 
     <main>
         <h1 class="page-title">Tracking Number</h1>
-        <form class="center">
+        <form class="center" action="{{ route('parcel.delivered') }}" method="POST" >
+        @csrf
 
             <hr>
 
             <div>
-            <label for="tracking">Tracking Number: {{$parcel_id}}</label>
+            <label for="tracking">Tracking Number: {{$tracking_number}}</label>
             </div>
             <hr>
 
             <div>
                 <label for="recepient">Receiver name:</label>
+                <input type="text" name="tracking_number" value={{$tracking_number}} readonly>
                 <input type="text" name="receiver_name" id="receiver_name" required>
             </div>
 
             <input type="submit" value="Submit">
+
       
 
         </form>
