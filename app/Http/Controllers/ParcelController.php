@@ -70,15 +70,19 @@ class ParcelController extends Controller
         //dd($parcel);
 
         if($parcel->status == Parcel::STATUS_PENDING){
-            $parcel->status = Parcel::STATUS_DELIVERING;
+            $parcel->status = Parcel::IN_TRANSIT;
             $parcel->save();
             return redirect()->back()->with('success', 'The parcel '.$parcel->tracking_number.' has updated to delivering status.');
-        } else if($parcel->status == Parcel::STATUS_DELIVERING){
+        } else if($parcel->status == Parcel::IN_TRANSIT){
             //TODO: change status from delivering to delivered
+          return view('courier.delivery_screen')->with('parcel_id',$parcel->tracking_number); 
             dd($parcel);
         }
-
     }
+
+
+
+
 
     function generateTrackingNumber($parcelId){
         return '#' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
