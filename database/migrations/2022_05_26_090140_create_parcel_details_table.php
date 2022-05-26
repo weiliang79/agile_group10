@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('parcels_details', function (Blueprint $table) {
+        Schema::create('parcel_details', function (Blueprint $table) {
             $table->id();
             $table->timestamp('time');
             $table->string('location');
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreignId('parcel_id');
             $table->foreign('parcel_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
+            $table->string('recipient_name');
+            $table->string('signature');
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parcels_details');
+        Schema::dropIfExists('parcel_details');
     }
 };
