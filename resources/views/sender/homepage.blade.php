@@ -115,7 +115,7 @@
                     @if($parcel->status == 1)
                     <td>Pending</td>
                     @elseif($parcel->status == 2)
-                    <td>Delivering</td>
+                    <td>In Transit</td>
                     @elseif($parcel->status == 3)
                     <td>Delivered</td>
                     @endif
