@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Controller::class, "root"])->name('root');
+Route::get('/landing', function () {
+    return view('landing.landing_page');
+});
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-process', [LoginController::class, 'process'])->name('login.process');
