@@ -87,12 +87,12 @@ class ParcelController extends Controller
     {
         $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
         $parcel->status = Parcel::STATUS_DELIVERED;
+        $parcel->recipient_name = $request->recipient_name;
+        $parcel->signature = $request->signature;
         $parcel->save();
         $parcel_details = new ParcelDetails;
         $parcel_details->location = $request->location;
         $parcel_details->parcel_id = $parcel->id;
-        $parcel_details->recipient_name = $request->recipient_name;
-        $parcel_details->signature = $request->signature;
         $parcel_details->save();
         return redirect()->route('root');
     }

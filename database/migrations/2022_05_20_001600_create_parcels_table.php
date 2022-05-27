@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('recipient_phone');
             $table->foreignId('courier_id')->nullable();
             $table->integer('status');
-            $table->timestamp('arrived_time')->nullable();
+            $table->string('recipient_name')->nullable();
+            $table->text('signature')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');

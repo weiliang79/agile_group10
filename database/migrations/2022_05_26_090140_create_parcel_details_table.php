@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('location');
             $table->text('message')->nullable();
             $table->foreignId('parcel_id');
-            $table->string('recipient_name');
-            $table->text('signature');
             $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('cascade');
             $table->softDeletes();
         });
