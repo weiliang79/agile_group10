@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->timestamp('time');
             $table->string('location');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->foreignId('parcel_id');
-            $table->foreign('parcel_id')->references('id')->on('users')->onDelete('cascade');
-            $table->softDeletes();
             $table->string('recipient_name');
             $table->string('signature');
+            $table->foreign('parcel_id')->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

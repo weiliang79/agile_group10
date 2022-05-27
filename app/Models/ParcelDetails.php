@@ -13,8 +13,6 @@ class ParcelDetails extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
-        'time',
         'location',
         'message',
         'parcel_id',
