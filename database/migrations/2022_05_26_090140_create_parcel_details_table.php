@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->foreignId('parcel_id');
             $table->string('recipient_name');
-            $table->string('signature');
-            $table->foreign('parcel_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('signature');
+            $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('cascade');
             $table->softDeletes();
         });
     }

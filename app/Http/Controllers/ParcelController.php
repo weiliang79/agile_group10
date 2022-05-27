@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDO;
@@ -59,7 +60,8 @@ class ParcelController extends Controller
         return redirect()->route('root')->with('success', 'Parcel details successfully saved.');
     }
 
-    public function updateParcel(Request $request){
+    public function updateParcel(Request $request)
+    {
         //dd($request);
 
         $request->validate([
@@ -70,33 +72,34 @@ class ParcelController extends Controller
 
         //dd($parcel);
 
-        if($parcel->status == Parcel::STATUS_PENDING){
+        if ($parcel->status == Parcel::STATUS_PENDING) {
             $parcel->status = Parcel::IN_TRANSIT;
+            $parcel->courier_id = Auth::user()->id;
             $parcel->save();
-            return redirect()->back()->with('success', 'The parcel '.$parcel->tracking_number.' has updated to in-transit status.');
-        } else if($parcel->status == Parcel::IN_TRANSIT){
+            return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to in-transit status.');
+        } else if ($parcel->status == Parcel::IN_TRANSIT) {
             //TODO: change status from in-transit to delivered
-          return view('courier.delivery_screen')->with('tracking_number',$parcel->tracking_number); 
-            dd($parcel);
+            return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
         }
     }
 
-    public function deliveredParcel(Request $request){
-            //dd(Parcel::STATUS_DELIVERED);     
-        
-            $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
-            $parcel->status =Parcel::STATUS_DELIVERED;
-            $parcel->save();
-            $parcel_details = new ParcelDetails;
-            $parcel_details->recipient_name = $request->receiver_name;
-            $parcel_details->save();
-
-
+    public function deliveredParcel(Request $request)
+    {
+        $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
+        $parcel->status = Parcel::STATUS_DELIVERED;
+        $parcel->save();
+        $parcel_details = new ParcelDetails;
+        $parcel_details->location = $request->location;
+        $parcel_details->parcel_id = $parcel->id;
+        $parcel_details->recipient_name = $request->recipient_name;
+        $parcel_details->signature = $request->signature;
+        $parcel_details->save();
+        return redirect()->route('root');
     }
 
 
-    function generateTrackingNumber($parcelId){
+    function generateTrackingNumber($parcelId)
+    {
         return '#' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
     }
-
 }

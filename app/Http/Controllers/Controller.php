@@ -18,26 +18,26 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function root(){
+    public function root()
+    {
         if (Auth::check()) {
             $user_id = Auth::user()->id;
-            if(Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')){
+            if (Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')) {
                 //TODO: sort parrcel status by: pending->in-transit->delivered
-                $parcels = Parcel::where('sender_id', Auth::user()->id)->get();
+                $parcels = Parcel::where('sender_id', $user_id)->get();
                 return view('sender.homepage', compact('parcels'));
-            } else if(Gate::allows('isCourier')){
-                $parcels = Parcel::where('courier_id', $user_id)->get();
+            } else if (Gate::allows('isCourier')) {
+                $parcels = Parcel::where('courier_id', $user_id)
+                    ->where('status', Parcel::IN_TRANSIT)
+                    ->get();
                 $now = Carbon::now();
                 $parcels->each(function ($parcel) use ($now) {
                     $parcel->elapsed_time = $parcel->created_at->diffInHours($now, false);
                 });
                 return view('courier.homepage', ['parcels' => $parcels]);
             }
-            
         } else {
             return redirect()->route('login');
         }
-        
     }
-    
 }
