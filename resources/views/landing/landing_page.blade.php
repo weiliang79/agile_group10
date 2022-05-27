@@ -65,21 +65,21 @@
 <section class="showcase">
     <div class="container-fluid p-0">
         <div class="row g-0">
-            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{ asset('assets') }}/images/bg-showcase-1.jpg')"></div>
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{ asset(\'assets\') }}/images/bg-showcase-1.jpg')"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                 <h2>Lorem ipsum dolor sit amet.</h2>
                 <p class="lead mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae a assumenda veniam earum porro natus debitis ducimus consequuntur id. Voluptatibus provident quasi atque nesciunt. Facilis magni itaque voluptatem ducimus molestiae, voluptate reiciendis temporibus voluptatibus odio pariatur dignissimos? Eaque est quidem perferendis, qui harum amet iste repellendus placeat assumenda nisi dignissimos, officia sit! Unde, commodi veritatis neque excepturi rerum maxime ipsum magni voluptatum mollitia animi molestiae perspiciatis praesentium iusto itaque in adipisci dolorum quo nemo amet iure quod similique earum sapiente? Ullam ratione, esse corrupti dicta dolores perferendis exercitationem ad ducimus, ipsam fuga inventore. Odit, nam accusamus. Dolore, deserunt animi. Illo.</p>
             </div>
         </div>
         <div class="row g-0">
-            <div class="col-lg-6 text-white showcase-img" style="background-image: url('{{ asset('assets') }}/images/bg-showcase-2.jpg')"></div>
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('{{ asset(\'assets\') }}/images/bg-showcase-2.jpg')"></div>
             <div class="col-lg-6 my-auto showcase-text">
                 <h2>Lorem ipsum dolor sit amet.</h2>
                 <p class="lead mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta ipsa beatae consequuntur minus impedit, deserunt distinctio molestiae repellendus eligendi ab, ratione voluptate cum excepturi obcaecati iure in fugit officia porro sapiente quibusdam asperiores corrupti recusandae! Tenetur praesentium minima incidunt unde soluta cupiditate cumque, quis blanditiis laboriosam voluptate aperiam numquam beatae id non quidem. Tenetur cum ipsam beatae nesciunt nostrum vitae quae pariatur quod placeat temporibus rerum fugit, earum commodi asperiores quasi aspernatur quos dicta laborum magnam aliquid laboriosam nulla. Sequi possimus praesentium quae repudiandae dolorem deleniti est. Reprehenderit illo neque necessitatibus, mollitia doloremque, minus natus in ducimus nemo animi labore.</p>
             </div>
         </div>
         <div class="row g-0">
-            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{ asset('assets') }}/images/bg-showcase-3.jpg')"></div>
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{ asset(\'assets\') }}/images/bg-showcase-3.jpg')"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                 <h2>Lorem ipsum dolor sit amet.</h2>
                 <p class="lead mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem doloremque perferendis omnis rem ipsa veniam. Eveniet hic ex repellat ipsa ut, obcaecati dolores iste doloremque rem perspiciatis cupiditate iure, aut facilis nihil unde dolorem dignissimos quasi dolore tempore reiciendis dicta? Facilis qui assumenda neque dignissimos tempore tempora quaerat blanditiis deleniti deserunt veritatis tenetur magnam consectetur fuga reiciendis saepe dolorem similique ipsum, repellat ratione temporibus cum illum harum vero! Soluta blanditiis reiciendis rerum? Distinctio quod ipsam atque maiores ad! Doloremque deserunt aliquam eveniet molestias beatae magnam nemo. Voluptatem, tenetur ullam quidem delectus, dolor sunt facere cumque hic quia expedita quisquam debitis?</p>
