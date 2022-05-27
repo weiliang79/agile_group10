@@ -8,11 +8,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!--title-->
-        <title>{{ config('app.name', 'Argon Dashboard') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Favicon -->
         <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
+        <!--jQuery-->
+        <script src="{{ asset('assets') }}/jQuery/js/jquery-3.6.0.min.js"></script>
 
         <!--bootstrap-->
         <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
