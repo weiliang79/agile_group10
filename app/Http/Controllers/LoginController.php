@@ -11,6 +11,9 @@ class LoginController extends Controller
 {
 
     public function index(){
+        if(Auth::check()){
+            return redirect()->route('home');
+        }
         return view('auth.login');
     }
 
@@ -26,7 +29,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error', "Wrong E-mail or Password! Please Try Again!");
         }
 
-        return redirect()->route('root');
+        return redirect()->route('home');
     }
 
     public function register(){

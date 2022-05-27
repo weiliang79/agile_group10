@@ -20,7 +20,7 @@ class Controller extends BaseController
 
     public function root()
     {
-        if (Auth::check()) {
+        /*if (Auth::check()) {
             $user_id = Auth::user()->id;
             if (Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')) {
                 //TODO: sort parrcel status by: pending->in-transit->delivered
@@ -28,7 +28,7 @@ class Controller extends BaseController
                 return view('sender.homepage', compact('parcels'));
             } else if (Gate::allows('isCourier')) {
                 $parcels = Parcel::where('courier_id', $user_id)
-                    ->where('status', Parcel::IN_TRANSIT)
+                    ->where('status', Parcel::STATUS_IN_TRANSIT)
                     ->get();
                 $now = Carbon::now();
                 $parcels->each(function ($parcel) use ($now) {
@@ -38,6 +38,6 @@ class Controller extends BaseController
             }
         } else {
             return redirect()->route('login');
-        }
+        }*/
     }
 }

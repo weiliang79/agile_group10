@@ -5,12 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use PDO;
 
 class ParcelController extends Controller
 {
+    public function index(){
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            if (Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')) {
+                //TODO: sort parrcel status by: pending->in-transit->delivered
+                $parcels = Parcel::where('sender_id', $user_id)->get();
+                return view('sender.homepage', compact('parcels'));
+            } else if (Gate::allows('isCourier')) {
+                $parcels = Parcel::where('courier_id', $user_id)
+                    ->where('status', Parcel::STATUS_IN_TRANSIT)
+                    ->get();
+                $now = Carbon::now();
+                $parcels->each(function ($parcel) use ($now) {
+                    $parcel->elapsed_time = $parcel->created_at->diffInHours($now, false);
+                });
+                return view('courier.homepage', ['parcels' => $parcels]);
+            }
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
     public function sendParcel(Request $request)
     {
         $request->validate([
@@ -73,11 +97,11 @@ class ParcelController extends Controller
         //dd($parcel);
 
         if ($parcel->status == Parcel::STATUS_PENDING) {
-            $parcel->status = Parcel::IN_TRANSIT;
+            $parcel->status = Parcel::STATUS_IN_TRANSIT;
             $parcel->courier_id = Auth::user()->id;
             $parcel->save();
             return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to in-transit status.');
-        } else if ($parcel->status == Parcel::IN_TRANSIT) {
+        } else if ($parcel->status == Parcel::STATUS_IN_TRANSIT) {
             //TODO: change status from in-transit to delivered
             return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
         }
