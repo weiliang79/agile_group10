@@ -5,13 +5,16 @@
 <style>
 	body{
 		background: url('{{ asset("assets") }}/images/bg-masthead.jpg');
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		background-attachment: fixed;
 	}
 </style>
 
 <div class="vh-100 h-100">
 	<div class="container py-5 h-100">
 		<div class="row d-flex justify-content-center align-items-center h-100">
-			<div class="col col-xl-10">
+			<div class="col col-xl-10" style="padding-bottom: 3%;">
 				<div class="card" style="border-radius: 1rem;">
 					<div class="row g-0">
 						<div class="col-md-6 col-lg-5 d-none d-md-block">
@@ -22,6 +25,10 @@
 
 								<form action="{{ route('login.process') }}" method="post">
 									@csrf
+
+									<div class="d-flex align-items-center mb-3 pb-1">
+										<span class="h1 fw-bold mb-0">{{ config('app.name', 'Laravel') }}</span>
+									</div>
 
 									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log into your account</h5>
 
