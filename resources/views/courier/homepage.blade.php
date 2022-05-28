@@ -34,7 +34,7 @@
                 @endforeach
             </ul>
         @endif
-        <form class="center" action="{{ route('parcel.update') }}" method="POST">
+        <form class="center" action="{{ route('courier.update_parcel') }}" method="POST">
             @csrf
             <div>
                 <label for="tracking">Tracking Number:</label>

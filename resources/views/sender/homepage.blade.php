@@ -32,7 +32,7 @@
             </ul>
         @endif
         <h1 class="page-title">Parcel Info</h1>
-        <form class="center" action="{{ route('parcel.send') }}" method="POST">
+        <form class="center" action="{{ route('normal_user.save_parcel') }}" method="POST">
             @csrf
             <div>
                 <label for="address">Sender address:</label>

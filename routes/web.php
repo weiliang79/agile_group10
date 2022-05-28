@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CourierController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ParcelController;
+use App\Http\Controllers\SenderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,19 +19,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//landing page
-Route::get('/', [LandingController::class, "index"])->name('landing');
 
-//login & logout
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login-process', [LoginController::class, 'process'])->name('login.process');
-Route::get('/register', [LoginController::class, 'register'])->name('register');
-Route::post('/register-process', [LoginController::class, 'registerProcess'])->name('register.process');
-Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
 
-Route::get('/home', [ParcelController::class, 'index'])->name('home');
+Route::group(['middleware' => ['guest']], function () {
 
-Route::post('/parcel-send', [ParcelController::class, 'sendParcel'])->name('parcel.send');
-Route::post('/parcel-update', [ParcelController::class, 'updateParcel'])->name('parcel.update');
-Route::post('/delivery-screen',[ParcelController::class, 'completeDelivery'])->name('delivery.screen');
-Route::post('/parcel-delivered',[ParcelController::class, 'deliveredParcel'])->name('parcel.delivered');
+    //landing page
+    Route::get('/', [LandingController::class, "index"])->name('landing');
+
+    //login & logout
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login-process', [LoginController::class, 'process'])->name('login.process');
+    Route::get('/register', [LoginController::class, 'register'])->name('register');
+    Route::post('/register-process', [LoginController::class, 'registerProcess'])->name('register.process');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
+
+    Route::group(['middleware' => ['can:isNormalUser']], function () {
+        Route::post('/normal_user/save_parcel', [SenderController::class, 'saveParcel'])->name('normal_user.save_parcel');
+    });
+
+    Route::group(['middleware' => ['can:isCourier']], function () {
+        Route::post('/courier/update_parcel', [CourierController::class, 'updateParcel'])->name('courier.update_parcel');
+        Route::post('/courier/deliver_parcel', [CourierController::class, 'deliverParcel'])->name('courier.deliver_parcel');
+    });
+    
+});

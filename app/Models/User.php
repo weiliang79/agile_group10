@@ -64,18 +64,42 @@ class User extends Authenticatable
     }
 
     public function isSuperAdmin(){
-        return $this->role->id == Role::ROLE_SUPER_ADMIN;
+
+        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN])->count() > 0){
+            return true;
+        }
+        return false;
+
+        //return $this->role->id == Role::ROLE_SUPER_ADMIN;
     }
 
     public function isManager(){
-        return $this->role->id == Role::ROLE_MANAGER;
+
+        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_MANAGER])->count() > 0){
+            return true;
+        }
+        return false;
+
+        //return $this->role->id == Role::ROLE_MANAGER;
     }
 
     public function isCourier(){
-        return $this->role->id == Role::ROLE_COURIER;
+
+        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_COURIER])->count() > 0){
+            return true;
+        }
+        return false;
+
+        //return $this->role->id == Role::ROLE_COURIER;
     }
 
     public function isNormalUser(){
-        return $this->role->id == Role::ROLE_NORMAL_USER;
+
+        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_NORMAL_USER])->count() > 0){
+            return true;
+        }
+        return false;
+
+        //return $this->role->id == Role::ROLE_NORMAL_USER;
     }
 }
