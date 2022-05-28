@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>Sender homepage</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url('/') }}/style.css">
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 </head>
 
@@ -30,7 +30,7 @@
             </ul>
         @endif
         <h1 class="page-title">Tracking Number</h1>
-        <form class="center" action="{{ route('parcel.delivered') }}" method="POST">
+        <form class="center" action="{{ route('courier.deliver_parcel') }}" method="POST">
             @csrf
 
             <hr>
