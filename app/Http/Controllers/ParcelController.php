@@ -109,6 +109,13 @@ class ParcelController extends Controller
 
     public function deliveredParcel(Request $request)
     {
+        $request->validate([
+            "tracking_number" => "required|regex:/^[#]/|min:9|max:9",   // copy from updateParcel
+            "recipient_name" => "required",
+            "signature" => "required|mimes:image/svg+xml",
+            "location" => "required",
+        ]);
+
         $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
         $parcel->status = Parcel::STATUS_DELIVERED;
         $parcel->recipient_name = $request->recipient_name;

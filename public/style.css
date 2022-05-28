@@ -43,3 +43,11 @@ label {
 	width: max-content;
 }
 
+canvas {
+	width: 600px;
+	height: 400px;
+	background-color:rgb(225, 252, 255);
+	display: block;
+	margin: 10px 0;
+}
+
