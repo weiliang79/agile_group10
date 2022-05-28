@@ -32,24 +32,32 @@
 
 									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register Here</h5>
 
+									@if($errors->any())
+									<ul>
+										@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+									@endif
+
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="text" name="first_name" placeholder="First Name" />
+										<input class="form-control form-control-lg {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="text" name="last_name" placeholder="Last Name" />
+										<input class="form-control form-control-lg {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="text" name="username" placeholder="Username" />
+										<input class="form-control form-control-lg {{ $errors->has('username') ? 'is-invalid' : '' }}" type="text" name="username" placeholder="Username" value="{{ old('username') }}" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="email" name="email" placeholder="Email Address" />
+										<input class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
+										<input class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" placeholder="Password" />
 									</div>
 
 									<div class="form-outline mb-4">
@@ -60,7 +68,7 @@
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="text" name="phone" placeholder="Phone" />
+										<input class="form-control form-control-lg {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone" placeholder="Phone" value="{{ old('phone') }}" />
 									</div>
 
 									<div class="pt-1 mb-4">

@@ -3,7 +3,7 @@
 @section('content')
 
 <style>
-	body{
+	body {
 		background: url('{{ asset("assets") }}/images/bg-masthead.jpg');
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
@@ -32,12 +32,20 @@
 
 									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log into your account</h5>
 
+									@if($errors->any())
+									<ul>
+										@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+									@endif
+
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="email" name="email" placeholder="Email Address" />
+										<input class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
+										<input class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" placeholder="Password" />
 									</div>
 
 									<div class="pt-1 mb-4">

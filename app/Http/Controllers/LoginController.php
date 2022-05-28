@@ -43,10 +43,10 @@ class LoginController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'username' => 'required',
-            'password' => 'required|min:6',
             'email' => 'required|email',
+            'password' => 'required|min:6',
             'gender' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
         ]);
 
         $user = User::create([
