@@ -26,13 +26,11 @@
 									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log into your account</h5>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="email" name="email" />
-										<label class="form-label" for="">Email address</label>
+										<input class="form-control form-control-lg" type="email" name="email" placeholder="Email Address" />
 									</div>
 
 									<div class="form-outline mb-4">
-										<input class="form-control form-control-lg" type="password" name="password" />
-										<label class="form-label" for="">Password</label>
+										<input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
 									</div>
 
 									<div class="pt-1 mb-4">
