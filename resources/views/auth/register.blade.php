@@ -1,77 +1,86 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	      	<title>Register page</title>
-<style type ="text/css">
-	input[type="submit"]{
-	     cursor: pointer;
-	    }
+@extends('layout.app')
+
+@section('content')
+
+<style>
+	body{
+		background: url('{{ asset("assets") }}/images/bg-masthead.jpg');
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		background-attachment: fixed;
+	}
 </style>
-	</head>
 
-	
-	<body>
+<div class="vh-100 h-100">
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col col-xl-10" style="padding-bottom: 3%;">
+				<div class="card" style="border-radius: 1rem;">
+					<div class="row g-0">
+						<div class="col-md-6 col-lg-5 d-none d-md-block">
+							<img src="{{ asset('assets') }}/images/bg-showcase-3.jpg" alt="" class="img-fluid w-100 h-100" style="border-radius: 1rem 0 0 1rem;" />
+						</div>
+						<div class="col-md-6 col-lg-7 d-flex align-items-center">
+							<div class="card-body p-4 p-lg-5 text-black">
 
-		<center>
-			<h3>Register here</h3>
-			<form action="{{ route('register.process') }}" method="POST">
-	    		@csrf
-			<table>
-			
-				<tr> 
-				   <td>First name:</td>
-				   <td><input type="text"  name="first_name" placeholder="Enter first name here">
-				   </td>
-				</tr>
-				
-				<tr> 
-				   <td>Last name:</td>
-				   <td><input type="text"  name="last_name" placeholder="Enter last name here">
-				   </td>
-				</tr> 
+								<form action="{{ route('register.process') }}" method="post">
+									@csrf
 
-				<tr> 
-				   <td>Username:</td>
-				   <td><input type="text"  name="username" placeholder="Enter username here">
-				   </td>
-				</tr> 
+									<div class="d-flex align-items-center mb-3 pb-1">
+										<span class="h1 fw-bold mb-0">{{ config('app.name', 'Laravel') }}</span>
+									</div>
 
-				<tr>
-				   <td>Password:</td>
-				   <td><input type="password" name="password" placeholder="Enter password here">
-				   </td>
-				</tr>
+									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register Here</h5>
 
-				<tr> 
-				   <td>Email:</td>
-				   <td><input type="text"  name="email" placeholder="Enter email here">
-				   </td>
-				</tr>
-				
-				<tr> 
-				   <td>Gender:</td>
-				   <td><label>Male</label><input type="radio"  name="gender" value="1" checked>
-				   <td><label>Female</label><input type="radio"  name="gender" value="2">
-				   </td>
-				</tr>
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="text" name="first_name" placeholder="First Name" />
+									</div>
 
-				<tr> 
-				   <td>Phone:</td>
-				   <td><input type="text"  name="phone" placeholder="Enter phone number here">
-				   </td>
-				</tr>
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="text" name="last_name" placeholder="Last Name" />
+									</div>
 
-				<tr>
-				   <td>
-					<input type="submit" name="submit" value="submit">
-				   </td>
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="text" name="username" placeholder="Username" />
+									</div>
 
-				<td>
-				   <p>Already have an account?<a href="login">Login here</a></p>
-				</td>
-			    </tr>
-				
-			</table> 
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="email" name="email" placeholder="Email Address" />
+									</div>
 
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
+									</div>
 
-			</form>	
+									<div class="form-outline mb-4">
+										<input class="form-check-input" type="radio" name="gender" value="1" checked />
+										<label class="form-check-label" for="">Male</label>
+										<input class="form-check-input" type="radio" name="gender" value="2" style="margin-left: 3%;"/>
+										<label class="form-check-label" for="">Female</label>
+									</div>
+
+									<div class="form-outline mb-4">
+										<input class="form-control form-control-lg" type="text" name="phone" placeholder="Phone" />
+									</div>
+
+									<div class="pt-1 mb-4">
+										<button class="btn btn-dark btn-lg btn-block" type="submit">Register</button>
+									</div>
+
+									<p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+
+									<a href="{{ route('landing') }}" class="small text-muted">Back to main page</a>
+								</form>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+@endsection
