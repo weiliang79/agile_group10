@@ -29,15 +29,28 @@ class Parcel extends Model
         'arrived_time',
     ];
 
-    public function details(){
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'tracking_number';
+    }
+
+    public function details()
+    {
         return $this->hasMany(Parcel_Details::class);
     }
 
-    public function sender(){
+    public function sender()
+    {
         return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function courier(){
+    public function courier()
+    {
         return $this->belongsTo(User::class, 'courier_id');
     }
 }

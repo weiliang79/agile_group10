@@ -35,7 +35,7 @@
 
             <hr>
 
-            <p>Tracking Number: {{ $tracking_number }}</p>
+            <p>Tracking Number: {{ $parcel->tracking_number }}</p>
 
             <hr>
 
@@ -44,7 +44,7 @@
                 <input type="text" name="recipient_name" id="recepient_name" required>
             </div>
             <canvas></canvas>
-            <input type="hidden" name="tracking_number" value={{ $tracking_number }} readonly required>
+            <input type="hidden" name="tracking_number" value="{{ $parcel->tracking_number }}" readonly required>
             <input type="hidden" name="location" readonly required>
             <input type="hidden" name="signature" readonly required>
 

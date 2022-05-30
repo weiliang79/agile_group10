@@ -14,10 +14,14 @@ class CourierController extends Controller
         //dd($request);
 
         $request->validate([
-            'tracking_number' => 'required|regex:/^[#]/|min:9|max:9',
+            'tracking_number' => 'required|regex:/^[P]/|min:9|max:9',
         ]);
 
         $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
+
+        if($parcel === null){
+            return redirect()->back()->with('error', "The tracking number not found!");
+        }
 
         //dd($parcel);
 
@@ -28,14 +32,27 @@ class CourierController extends Controller
             return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to in-transit status.');
         } else if ($parcel->status == Parcel::STATUS_IN_TRANSIT) {
             //TODO: change status from in-transit to delivered
-            return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
+            //return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
+            return redirect()->route('courier.deliver_screen', compact('parcel'));
         }
+    }
+
+    public function deliverScreen(Request $request){
+        //dd($request);
+
+        $parcel = Parcel::where('tracking_number', $request->parcel)->first();
+        if($parcel === null){
+            return redirect()->route('home')->with('error', "The tracking number not found!");
+        }
+
+        return view('courier.delivery_screen', compact('parcel'));
     }
 
     public function deliverParcel(Request $request)
     {
+        //dd($request);
         $request->validate([
-            "tracking_number" => "required|regex:/^[#]/|min:9|max:9",   // copy from updateParcel
+            "tracking_number" => "required|regex:/^[P]/|min:9|max:9",   // copy from updateParcel
             "recipient_name" => "required",
             "signature" => "required",
             "location" => "required",
@@ -50,6 +67,6 @@ class CourierController extends Controller
         $parcel_details->location = $request->location;
         $parcel_details->parcel_id = $parcel->id;
         $parcel_details->save();
-        return redirect()->route('root');
+        return redirect()->route('home')->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to delivered status.');
     }
 }
