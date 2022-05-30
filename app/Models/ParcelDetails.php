@@ -13,12 +13,10 @@ class ParcelDetails extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'time',
         'location',
         'message',
         'parcel_id',
-        'recipient_name',
-        'signature'
-
     ];
 
     public function parcel(){

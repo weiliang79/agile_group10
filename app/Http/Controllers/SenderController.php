@@ -61,7 +61,7 @@ class SenderController extends Controller
 
     function generateTrackingNumber($parcelId)
     {
-        return '#' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
+        return 'P' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
     }
 
 }

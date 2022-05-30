@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['can:isCourier']], function () {
         Route::post('/courier/update_parcel', [CourierController::class, 'updateParcel'])->name('courier.update_parcel');
+        Route::get('/courier/{parcel:tracking_number}/deliver_screen', [CourierController::class, 'deliverScreen'])->name('courier.deliver_screen');
         Route::post('/courier/deliver_parcel', [CourierController::class, 'deliverParcel'])->name('courier.deliver_parcel');
     });
     
