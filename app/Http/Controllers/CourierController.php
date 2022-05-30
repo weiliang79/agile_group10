@@ -37,7 +37,7 @@ class CourierController extends Controller
         $request->validate([
             "tracking_number" => "required|regex:/^[#]/|min:9|max:9",   // copy from updateParcel
             "recipient_name" => "required",
-            "signature" => "required|mimes:image/svg+xml",
+            "signature" => "required",
             "location" => "required",
         ]);
 
