@@ -25,6 +25,8 @@ class Parcel extends Model
         'recipient_phone',
         'courier_id',
         'status',
+        'receiver_name',
+        'signature',
         'created_time',
         'arrived_time',
     ];
