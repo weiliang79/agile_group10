@@ -1,129 +1,122 @@
-<!DOCTYPE html>
+@extends('layout.app')
 
-<html>
+@section('content')
 
-<head>
-    <meta charset="utf-8">
-    <title>Sender homepage</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+@include('layout.navbars.topnav')
 
-<body class="center">
-    @if(Session::get('success'))
-    <script type="text/javascript">alert("{{ Session::get('success') }}")</script>
-    @endif
-    <header>
-        <h2>Sender Homepage</h2>
+<div class="container-fluid py-5" style="background-color: black;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-        <nav>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">nav 2</a></li>
-            <li><a href="#">nav 3</a></li>
-            <li><a href="#">nav 4</a></li>
-        </nav>
-    </header>
+                        <form action="{{ route('normal_user.save_parcel') }}" method="post">
+                            @csrf
 
-    <main>
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-        <h1 class="page-title">Parcel Info</h1>
-        <form class="center" action="{{ route('normal_user.save_parcel') }}" method="POST">
-            @csrf
-            <div>
-                <label for="address">Sender address:</label>
-                <input type="text" name="sender_address" id="address" required>
+                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">New Parcel Info</h5>
+
+                            @if($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('sender_address') ? 'is-invalid' : '' }}" type="text" name="sender_address" placeholder="Sender Address" value="{{ old('sender_address') }}">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('sender_postcode') ? 'is-invalid' : '' }}" type="text" name="sender_postcode" placeholder="Sender Postcode" value="{{ old('sender_postcode') }}">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_firstname') ? 'is-invalid' : '' }}" type="text" name="recipient_firstname" placeholder="Recipient First Name" value="{{ old('recipient_firstname') }}">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_lastname') ? 'is-invalid' : '' }}" type="text" name="recipient_lastname" placeholder="Recipient Last Name" value="{{ old('recipient_lastname') }}">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_address') ? 'is-invalid' : '' }}" type="text" name="recipient_address" placeholder="Recipient Address" value="{{ old('recipient_address') }}" autocomplete="address-line1">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_postcode') ? 'is-invalid' : '' }}" type="text" name="recipient_postcode" placeholder="Recipient Postcode" value="{{ old('recipient_postcode') }}" autocomplete="postal-code">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_phone') ? 'is-invalid' : '' }}" type="text" name="recipient_phone" placeholder="Recipient Phone" value="{{ old('recipient_phone') }}">
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('weight') ? 'is-invalid' : '' }}" type="text" name="weight" placeholder="Parcel Weight" value="{{ old('weight') }}">
+                            </div>
+
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="address">Sender postcode:</label>
-                <input type="number" name="sender_postcode" id="address" required>
-            </div>
-            <div>
-                <label for="recepient">recipient first name:</label>
-                <input type="text" name="recipient_firstname" id="recepient-name" required>
-            </div>
-            <div>
-                <label for="recepient">recipient last name:</label>
-                <input type="text" name="recipient_lastname" id="recepient-name" required>
-            </div>
-            <div>
-                <label for="address">recipient address:</label>
-                <input type="text" name="recipient_address" id="address" autocomplete="address-line1" required>
-            </div>
-            <div>
-                <label for="address">recipient postcode:</label>
-                <input type="number" name="recipient_postcode" id="address" autocomplete="postal-code" required>
-            </div>
-            <div>
-                <label for="address">recipient phone:</label>
-                <input type="number" name="recipient_phone" id="address" required>
-            </div>
-            <div>
-                <label for="weight">Package weight:</label>
-                <input type="number" name="weight" id="weight" step="0.01" required>
-            </div>
-
-            <input type="submit" value="Send">
-
-        </form>
-
-        {{-- style sheet for table --}}
-        <style>
-            table {
-                border-collapse: separate;
-                border-spacing: 20px 0;
-            }
-
-            th {
-                background-color: #4287f5;
-                color: white;
-            }
-
-            th,
-            td {
-                width: 150px;
-                text-align: center;
-                border: 1px solid black;
-                padding: 5px;
-            }
-
-            h2 {
-                color: #4287f5;
-            }
-
-        </style>
-        <div class="parcel-list center">
-            <h2>List of parcel status</h2>
-            <table>
-                <tr>
-                    <th>Tracking Number</th>
-                    <th>Recipient Name</th>
-                    <th>Recipient Address</th>
-                    <th>Recipient Phone</th>
-                    <th>Status</th>
-                </tr>
-                @foreach($parcels as $parcel)
-                <tr>
-                    <td>{{ $parcel->tracking_number }}</td>
-                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
-                    <td>{{ $parcel->recipient_address }}</td>
-                    <td>{{ $parcel->recipient_phone }}</td>
-                    @if($parcel->status == 1)
-                    <td>Pending</td>
-                    @elseif($parcel->status == 2)
-                    <td>In Transit</td>
-                    @elseif($parcel->status == 3)
-                    <td>Delivered</td>
-                    @endif
-                </tr>
-                @endforeach
-            </table>
         </div>
-    </main>
-</body>
+    </div>
+</div>
 
-</html>
+<div class="container-fluid py-5" style="background-color: green;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5 text-black">
+
+                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel Status</h5>
+
+                            <table class="table align-items-center table-flush showDataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Tracking Number</th>
+                                        <th>Recipient Name</th>
+                                        <th>Recipient Address</th>
+                                        <th>Recipient Phone</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach($parcels as $parcel)
+                                    <tr>
+                                        <td>{{ $parcel->tracking_number }}</td>
+                                        <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                        <td>{{ $parcel->recipient_address }}</td>
+                                        <td>{{ $parcel->recipient_phone }}</td>
+                                        @if($parcel->status == 1)
+                                        <td>Pending</td>
+                                        @elseif($parcel->status == 2)
+                                        <td>In Transit</td>
+                                        @elseif($parcel->status == 3)
+                                        <td>Delivered</td>
+                                        @endif
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('layout.navbars.footer')
+
+@endsection

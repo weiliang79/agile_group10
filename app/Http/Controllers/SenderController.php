@@ -13,6 +13,7 @@ class SenderController extends Controller
     {
         
         $request->validate([
+            'sender_address' => 'required',
             "sender_postcode" => "required",
             "recipient_firstname" => "required",
             "recipient_lastname" => "required",
