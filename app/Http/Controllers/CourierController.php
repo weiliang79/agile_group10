@@ -52,7 +52,7 @@ class CourierController extends Controller
         return view('courier.delivery_screen', compact('parcel'));
     }
 
-    public function deliverParcel(Request $request)
+    public function deliverScreenSubmit(Request $request)
     {
         //dd($request);
         $request->validate([
