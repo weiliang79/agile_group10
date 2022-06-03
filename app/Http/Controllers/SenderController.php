@@ -36,7 +36,7 @@ class SenderController extends Controller
         $parcel->recipient_address = $request->recipient_address;
         $parcel->recipient_postcode = $request->recipient_postcode;
         $parcel->recipient_phone = $request->recipient_phone;
-        $parcel->status = Parcel::STATUS_PENDING;*/
+        $parcel->status = Parcel::STATUS_NOT_DISPATCHED;*/
 
         //$parcel->save();
 
@@ -50,7 +50,7 @@ class SenderController extends Controller
             'recipient_address' => $request->recipient_address,
             'recipient_postcode' => $request->recipient_postcode,
             'recipient_phone' => $request->recipient_phone,
-            'status' => Parcel::STATUS_PENDING,
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
         ]);
 
         $parcel->tracking_number = SenderController::generateTrackingNumber($parcel->id);

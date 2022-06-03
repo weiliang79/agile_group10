@@ -25,7 +25,7 @@ class CourierController extends Controller
 
         //dd($parcel);
 
-        if ($parcel->status == Parcel::STATUS_PENDING) {
+        if ($parcel->status == Parcel::STATUS_NOT_DISPATCHED) {
             $parcel->status = Parcel::STATUS_IN_TRANSIT;
             $parcel->courier_id = Auth::user()->id;
             $parcel->save();

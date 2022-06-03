@@ -23,7 +23,7 @@ class Controller extends BaseController
         /*if (Auth::check()) {
             $user_id = Auth::user()->id;
             if (Gate::allows('isSuperAdmin') || Gate::allows('isNormalUser')) {
-                //TODO: sort parrcel status by: pending->in-transit->delivered
+                //TODO: sort parrcel status by: not-dispatched->in-transit->delivered
                 $parcels = Parcel::where('sender_id', $user_id)->get();
                 return view('sender.homepage', compact('parcels'));
             } else if (Gate::allows('isCourier')) {

@@ -25,7 +25,7 @@ class HomeController extends Controller
                 });
                 return view('courier.homepage', ['parcels' => $parcels]);
             } else if (Gate::allows('isNormalUser')) {
-                //TODO: sort parrcel status by: pending->in-transit->delivered
+                //TODO: sort parrcel status by: not-dispatched->in-transit->delivered
                 $parcels = Parcel::where('sender_id', $user_id)->get();
                 return view('sender.homepage', compact('parcels'));
             }

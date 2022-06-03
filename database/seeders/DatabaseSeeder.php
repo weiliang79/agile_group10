@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_PENDING,
+            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
         ]);
         Parcel::create([
             'tracking_number' => "P00000002",
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_PENDING,
+            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
         ]);
         Parcel::create([
             'tracking_number' => "P00000003",
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_PENDING,
+            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
         ]);
         Parcel::create([
             'tracking_number' => "P00000004",
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_PENDING,
+            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
         ]);
         Parcel::create([
             'tracking_number' => "P00000005",
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_PENDING,
+            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
         ]);
     }
 }
