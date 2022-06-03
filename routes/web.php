@@ -5,6 +5,7 @@ use App\Http\Controllers\CourierController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\SenderController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/courier/update_parcel', [CourierController::class, 'updateParcel'])->name('courier.update_parcel');
         Route::get('/courier/{parcel:tracking_number}/deliver_screen', [CourierController::class, 'deliverScreen'])->name('courier.deliver_screen');
         Route::post('/courier/deliver_screen_submit', [CourierController::class, 'deliverScreenSubmit'])->name('courier.deliver_screen_submit');
+    });
+
+    Route::group(['middleware' => ['can:isManager']], function () {
+        Route::get('/manager/tracking_in_transit', [ManagerController::class, 'trackingInTransit'])->name('manager.tracking_in_transit');
     });
     
 });
