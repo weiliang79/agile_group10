@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
+            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
         ]);
         Parcel::create([
             'tracking_number' => "P00000005",
@@ -87,7 +87,63 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->postcode(),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => 3,
-            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
+            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
+        ]);
+        Parcel::create([
+            'tracking_number' => "P00000006",
+            'weight' => $this->faker->numerify(),
+            'sender_id' => 4,
+            'sender_address' => $this->faker->address(),
+            'sender_postcode' => $this->faker->postcode(),
+            'recipient_firstname' => $this->faker->firstName(),
+            'recipient_lastname' => $this->faker->lastName(),
+            'recipient_address' => $this->faker->address(),
+            'recipient_postcode' => $this->faker->postcode(),
+            'recipient_phone' => $this->faker->phoneNumber(),
+            'courier_id' => 3,
+            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
+        ]);
+        Parcel::create([
+            'tracking_number' => "P00000007",
+            'weight' => $this->faker->numerify(),
+            'sender_id' => 4,
+            'sender_address' => $this->faker->address(),
+            'sender_postcode' => $this->faker->postcode(),
+            'recipient_firstname' => $this->faker->firstName(),
+            'recipient_lastname' => $this->faker->lastName(),
+            'recipient_address' => $this->faker->address(),
+            'recipient_postcode' => $this->faker->postcode(),
+            'recipient_phone' => $this->faker->phoneNumber(),
+            'courier_id' => 3,
+            'status' => \App\Models\Parcel::STATUS_DELIVERED,
+        ]);
+        Parcel::create([
+            'tracking_number' => "P00000008",
+            'weight' => $this->faker->numerify(),
+            'sender_id' => 4,
+            'sender_address' => $this->faker->address(),
+            'sender_postcode' => $this->faker->postcode(),
+            'recipient_firstname' => $this->faker->firstName(),
+            'recipient_lastname' => $this->faker->lastName(),
+            'recipient_address' => $this->faker->address(),
+            'recipient_postcode' => $this->faker->postcode(),
+            'recipient_phone' => $this->faker->phoneNumber(),
+            'courier_id' => 3,
+            'status' => \App\Models\Parcel::STATUS_DELIVERED,
+        ]);
+        Parcel::create([
+            'tracking_number' => "P00000009",
+            'weight' => $this->faker->numerify(),
+            'sender_id' => 4,
+            'sender_address' => $this->faker->address(),
+            'sender_postcode' => $this->faker->postcode(),
+            'recipient_firstname' => $this->faker->firstName(),
+            'recipient_lastname' => $this->faker->lastName(),
+            'recipient_address' => $this->faker->address(),
+            'recipient_postcode' => $this->faker->postcode(),
+            'recipient_phone' => $this->faker->phoneNumber(),
+            'courier_id' => 3,
+            'status' => \App\Models\Parcel::STATUS_DELIVERED,
         ]);
     }
 }
