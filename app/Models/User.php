@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -101,5 +102,14 @@ class User extends Authenticatable
         return false;
 
         //return $this->role->id == Role::ROLE_NORMAL_USER;
+    }
+
+    /**
+     * refer to https://laravel.com/docs/9.x/eloquent#local-scopes
+     * 
+     */
+    public function scopeManager($query) : Builder
+    {
+        return $query->where("role_id", Role::ROLE_MANAGER);
     }
 }

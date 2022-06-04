@@ -17,6 +17,7 @@
         <nav>
             <li><a href="#">tracking not dispatched</a></li>
             <li><a href="#">tracking delivered</a></li>
+            <li><a href="{{ url('/logout') }}">logout</a></li>
         </nav>
     </header>
 
@@ -33,12 +34,11 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                    
-                    <tr>
-                        <th scope="row">{{$loop->index+1}}</th>
-                        <td>{{$item->first_name}}</td>
-                        <td>{{$item->total}}</td>
-                    </tr>
+                        <tr>
+                            <th scope="row">{{ $loop->index + 1 }}</th>
+                            <td>{{ $item->first_name }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
