@@ -24,4 +24,8 @@ class ManagerController extends Controller
         
         return view('manager.tracking_in_transit', ['data' => $data]);
     }
+
+    public function trackingInTransitSingle($courier_id) {
+        return view('manager.tracking_in_transit_single');
+    }
 }
