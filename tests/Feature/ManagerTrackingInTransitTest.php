@@ -31,7 +31,7 @@ class ManagerTrackingInTransitTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee("<h2>Manager Tracking Page</h2>", false);
-        $response->assertSeeText("Couriers with parcel still to deliver");
+        $response->assertSeeText("Couriers with parcel in transit");
 
         // by default there is one row 
         $response->assertSee("<th scope=\"row\">", false);

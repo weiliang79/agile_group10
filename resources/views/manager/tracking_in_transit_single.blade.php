@@ -15,17 +15,29 @@
     
     <main>
         <div class="parcel-list center">
-            <h2 class="my-5">Couriers with parcel still to deliver</h2>
+            <h2 class="my-5 text-center">{{$courier_name}} in transit</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">💀</th>
-                        <th scope="col">Courier name</th>
-                        <th scope="col">Number of parcel (in-transit)</th>
+                        <th scope="col">Tracking Number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">Date Posted</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($parcels as $row)
+                        <tr>
+                            <th scope="row">
+                                {{ $loop->index + 1 }}
+                            </th>
+                            <td>{{ $row->tracking_number }}</td>
+                            <td>{{ $row->recipient_address }}</td>
+                            <td>{{ $row->recipient_postcode }}</td>
+                            <td>{{ $row->created_at->format('d\/m\/y') }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

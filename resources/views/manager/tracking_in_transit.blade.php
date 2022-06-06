@@ -15,7 +15,7 @@
 
     <main>
         <div class="parcel-list center">
-            <h2 class="my-5">Couriers with parcel still to deliver</h2>
+            <h2 class="my-5">Couriers with parcel in transit</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -25,15 +25,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $item)
+                    @foreach ($table as $row)
                         <tr style="transform: rotate(0);">
                             <th scope="row">
-                                <a href="{{ route('manager.tracking_single', ['courier_id' => $item->id]) }}"
+                                <a href="{{ route('manager.tracking_single', ['courier_id' => $row->id]) }}"
                                     class="stretched-link"></a>
                                 {{ $loop->index + 1 }}
                             </th>
-                            <td>{{ $item->first_name }}</td>
-                            <td>{{ $item->total }}</td>
+                            <td>{{ $row->first_name }}</td>
+                            <td>{{ $row->total }}</td>
                         </tr>
                     @endforeach
                 </tbody>
