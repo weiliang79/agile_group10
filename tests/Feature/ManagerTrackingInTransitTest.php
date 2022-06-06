@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Faker\Factory as Faker;
 
-class CourierTrackingInTransitTest extends TestCase
+class ManagerTrackingInTransitTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -34,7 +34,7 @@ class CourierTrackingInTransitTest extends TestCase
         $response->assertSeeText("Couriers with parcel still to deliver");
 
         // by default there is one row 
-        $response->assertSee("<th scope=\"row\">1</th>", false);
+        $response->assertSee("<th scope=\"row\">", false);
     }
 
     public function test_tracking_page_two_courier_have_parcel_in_transit()
@@ -58,8 +58,8 @@ class CourierTrackingInTransitTest extends TestCase
         $user = User::manager()->first();
         $response = $this->actingAs($user)->get(route("manager.tracking_in_transit"));
 
-        // there is two row of courier
-        $response->assertSee("<th scope=\"row\">2</th>", false);
+        // there is new row of courier
+        $response->assertSee("<td>FedEx</td>", false);
     }
 
     private function newCourier() {
