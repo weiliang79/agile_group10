@@ -57,14 +57,14 @@ class CourierController extends Controller
         //dd($request);
         $request->validate([
             "tracking_number" => "required|regex:/^[P]/|min:9|max:9",   // copy from updateParcel
-            "recipient_name" => "required",
+            "receiver_name" => "required",
             "signature" => "required",
             "location" => "required",
         ]);
 
         $parcel = Parcel::where('tracking_number', $request->tracking_number)->first();
         $parcel->status = Parcel::STATUS_DELIVERED;
-        $parcel->recipient_name = $request->recipient_name;
+        $parcel->receiver_name = $request->receiver_name;
         $parcel->signature = $request->signature;
         $parcel->save();
         $parcel_details = new ParcelDetails;

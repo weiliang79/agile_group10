@@ -30,7 +30,7 @@
             </ul>
         @endif
         <h1 class="page-title">Tracking Number</h1>
-        <form class="center" action="{{ route('courier.deliver_parcel') }}" method="POST">
+        <form class="center" action="{{ route('courier.deliver_screen_submit') }}" method="POST">
             @csrf
 
             <hr>
@@ -40,8 +40,8 @@
             <hr>
 
             <div>
-                <label for="recepient_name"> Recepient Name:</label>
-                <input type="text" name="recipient_name" id="recepient_name" required>
+                <label for="receiver_name"> Receiver Name:</label>
+                <input type="text" name="receiver_name" id="receiver_name" required>
             </div>
             <canvas></canvas>
             <input type="hidden" name="tracking_number" value="{{ $parcel->tracking_number }}" readonly required>
