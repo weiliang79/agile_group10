@@ -16,6 +16,39 @@
     <main class="container">
         <div class="mx-auto" style="width: max-content">
             <h2 class="my-5 text-center">Parcel not dispatched</h2>
+            {{-- flagged --}}
+            @if (!$flagged->isEmpty())
+
+                <h4 class="text-danger">Flagged</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">💀</th>
+                            <th scope="col">Tracking Number</th>
+                            <th scope="col">Courier Name</th>
+                            <th scope="col">Postcode</th>
+                            <th scope="col">Date Posted</th>
+                            <th scope="col">Hours Elapsed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($flagged as $row)
+                            <tr class="table-danger">
+                                <th scope="row">
+                                    {{ $loop->index + 1 }}
+                                </th>
+                                <td>{{ $row->tracking_number }}</td>
+                                <td>{{ $row->courier->first_name }}</td>
+                                <td>{{ $row->recipient_postcode }}</td>
+                                <td>{{ $row->created_at->format('d\/m\/y') }}</td>
+                                <td>{{ $row->created_at->diffInHours(Carbon\Carbon::now(), false) }} hrs</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+
+            {{-- not dispatched --}}
             <table class="table">
                 <thead>
                     <tr>
