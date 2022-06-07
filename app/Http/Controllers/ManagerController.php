@@ -37,4 +37,9 @@ class ManagerController extends Controller
         // ddd(get_defined_vars());
         return view('manager.tracking_in_transit_single', ['parcels' => $parcels, 'courier_name' => $courier_name]);
     }
+
+    public function trackingNotDispatched() {
+        $parcels = Parcel::where('status', Parcel::STATUS_NOT_DISPATCHED)->get();
+        return view('manager.tracking_not_dispatched', ['parcels' => $parcels]);
+    }
 }

@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['can:isManager']], function () {
         Route::get('/manager/tracking_in_transit', [ManagerController::class, 'trackingInTransit'])->name('manager.tracking_in_transit');
         Route::get('/manager/tracking_single/{courier_id}', [ManagerController::class, 'trackingInTransitSingle'])->name('manager.tracking_single');
+        Route::get('/manager/tracking_not_dispatched', [ManagerController::class, 'trackingNotDispatched'])->name('manager.tracking_not_dispatched');
     });
     
 });
