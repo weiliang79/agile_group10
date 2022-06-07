@@ -39,7 +39,9 @@ class ManagerController extends Controller
     }
 
     public function trackingNotDispatched() {
-        $parcels = Parcel::where('status', Parcel::STATUS_NOT_DISPATCHED)->get();
+        $parcels = Parcel::where('status', Parcel::STATUS_NOT_DISPATCHED)
+            ->orderBy('created_at', 'DESC')
+            ->get();
         return view('manager.tracking_not_dispatched', ['parcels' => $parcels]);
     }
 }
