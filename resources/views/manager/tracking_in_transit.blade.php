@@ -5,17 +5,17 @@
 <head>
     <meta charset="utf-8">
     <title>Courier Tracking Page</title>
-    <link rel="stylesheet" href="{{ url('/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ url('/style.css') }}"> --}}
     <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets') }}/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
 </head>
 
-<body class="center">
+<body>
     @include('manager._header')
 
-    <main>
-        <div class="parcel-list center">
-            <h2 class="my-5">Couriers with parcel in transit</h2>
+    <main class="container">
+        <div class="mx-auto" style="width: max-content">
+            <h2 class="my-5 text-center">Couriers with parcel in transit</h2>
             <table class="table">
                 <thead>
                     <tr>
