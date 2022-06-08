@@ -15,17 +15,6 @@ return new class extends Migration
      */
     public function up()
     {
-        $user = User::create([
-            'username' => 'SuperAdmin',
-            'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'email' => 'superadmin@isp.com',
-            'password' => bcrypt('admin123'),
-            'gender' => '1',
-            'phone' => '0123456789',
-        ]);
-        $user->role()->associate(Role::ROLE_SUPER_ADMIN);
-        $user->save();
 
         $user = User::create([
             'username' => 'Manager',

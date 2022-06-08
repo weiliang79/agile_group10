@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
     use HasFactory, SoftDeletes;
-    const ROLE_SUPER_ADMIN = 1, ROLE_MANAGER = 2, ROLE_COURIER = 3, ROLE_NORMAL_USER = 4;
+    const ROLE_MANAGER = 1, ROLE_COURIER = 2, ROLE_NORMAL_USER = 3;
 
     protected $fillable = [
         "role_name",

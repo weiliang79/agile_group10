@@ -64,19 +64,10 @@ class User extends Authenticatable
         return $this->hasMany(Parcel::class, 'courier_id');
     }
 
-    public function isSuperAdmin(){
-
-        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN])->count() > 0){
-            return true;
-        }
-        return false;
-
-        //return $this->role->id == Role::ROLE_SUPER_ADMIN;
-    }
 
     public function isManager(){
 
-        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_MANAGER])->count() > 0){
+        if($this->role()->whereIn('id', [Role::ROLE_MANAGER])->count() > 0){
             return true;
         }
         return false;
@@ -86,7 +77,7 @@ class User extends Authenticatable
 
     public function isCourier(){
 
-        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_COURIER])->count() > 0){
+        if($this->role()->whereIn('id', [Role::ROLE_COURIER])->count() > 0){
             return true;
         }
         return false;
@@ -96,7 +87,7 @@ class User extends Authenticatable
 
     public function isNormalUser(){
 
-        if($this->role()->whereIn('id', [Role::ROLE_SUPER_ADMIN, Role::ROLE_NORMAL_USER])->count() > 0){
+        if($this->role()->whereIn('id', [Role::ROLE_NORMAL_USER])->count() > 0){
             return true;
         }
         return false;
