@@ -30,11 +30,16 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/fontawesome-6.1.1/css/solid.min.css">
 
     <!--datatables-->
-    <link rel="stylesheet" href="{{ asset('assets') }}/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/DataTables/DataTables-1.12.1/css/dataTables.bootstrap5.min.css">
     <script src="{{ asset('assets') }}/DataTables/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
     <!--landing-->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/styles.css">
+
+    <!--szimek/signature_pad-->
+    <!--https://github.com/szimek/signature_pad-->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
     @stack('css')
 </head>
@@ -59,6 +64,18 @@
 
     <div class="main-content">
         @yield('content')
+
+        @if(Session::get('success'))
+        <script type="text/javascript">
+            alert("{{ Session::get('success') }}")
+        </script>
+        @endif
+
+        @if(Session::get('error'))
+        <script type="text/javascript">
+            alert("{{ Session::get('error') }}")
+        </script>
+        @endif
     </div>
 
     @stack('js')

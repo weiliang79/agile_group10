@@ -10,6 +10,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
+
+                @can('isCourier')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('courier.tracking_page') }}">Tracking</a>
+                </li>
+                @endcan
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav nav-item">

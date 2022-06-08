@@ -1,96 +1,86 @@
-<!DOCTYPE html>
+@extends('layout.app')
 
-<html>
+@section('content')
 
-<head>
-    <meta charset="utf-8">
-    <title>Sender homepage</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+@include('layout.navbars.topnav')
 
-<body class="center">
-    @if (Session::get('success'))
-        <script type="text/javascript">
-            alert("{{ Session::get('success') }}")
-        </script>
-    @endif
-    <header>
-        <h2>Courier Homepage</h2>
+<div class="container-fluid py-5" style="background-color: black;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-        <nav>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">nav 2</a></li>
-            <li><a href="#">nav 3</a></li>
-            <li><a href="#">nav 4</a></li>
-        </nav>
-    </header>
+                        <form action="{{ route('courier.update_parcel') }}" method="post">
+                            @csrf
 
-    <main>
-        <h1 class="page-title">Tracking Number</h1>
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-        <form class="center" action="{{ route('courier.update_parcel') }}" method="POST">
-            @csrf
-            <div>
-                <label for="tracking">Tracking Number:</label>
-                <input type="text" name="tracking_number" id="number" required>
+                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Tracking Number</h5>
+
+                            @if($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
+
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('tracking_number') ? 'is-invalid' : '' }}" type="text" name="tracking_number" placeholder="Tracking Number" value="{{ old('tracking_number') }}">
+                            </div>
+
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
             </div>
-
-            <input type="submit" value="Send">
-
-        </form>
-
-        {{-- style sheet for table --}}
-        <style>
-            table {
-                border-collapse: separate;
-                border-spacing: 20px 0;
-            }
-
-            th {
-                background-color: #4287f5;
-                color: white;
-            }
-
-            th,
-            td {
-                width: 150px;
-                text-align: center;
-                border: 1px solid black;
-                padding: 5px;
-            }
-
-            h2 {
-                color: #4287f5;
-            }
-
-        </style>
-
-        <div class="parcel-list center">
-            <h2>List of parcel in transit</h2>
-            <table>
-                <tr>
-                    <th>Receipient Name</th>
-                    <th>Destination</th>
-                    <th>Weight (KG)</th>
-                    <th>Hours Elapsed</th>
-                </tr>
-                @foreach ($parcels as $parcel)
-                    <tr>
-                        <td class="td">{{ $parcel->tracking_number }}</td>
-                        <td>{{ $parcel->recipient_address }}</td>
-                        <td>{{ $parcel->weight }}</td>
-                        <td>{{ $parcel->elapsed_time }}</td>
-                    </tr>
-                @endforeach
-            </table>
         </div>
-    </main>
-</body>
+    </div>
+</div>
 
-</html>
+<div class="container-fluid py-5" style="background-color: green;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel in Transit</h5>
+
+                        <table class="table table-striped align-items-center table-flush showDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tracking Number</th>
+                                    <th>Recipient Name</th>
+                                    <th>Destination</th>
+                                    <th>Weight (Kg)</th>
+                                    <th>Hours Elapsed</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($parcels as $parcel)
+                                <tr>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->weight }}</td>
+                                    <td>{{ $parcel->elapsed_time }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('layout.navbars.footer')
+
+@endsection

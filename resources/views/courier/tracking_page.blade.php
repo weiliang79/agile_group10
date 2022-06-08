@@ -1,50 +1,49 @@
-<!DOCTYPE html>
+@extends('layout.app')
 
-<html>
+@section('content')
 
-<head>
-      <meta charset="utf-8">
-      <title>Courier Tracking Page</title>
-      <link rel="stylesheet" href="style.css">
-      <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets') }}/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
-</head>
+@include('layout.navbars.topnav')
 
-<body class="center">
-      
-            @include('courier._header')
-      <main>
+<div class="container-fluid py-5" style="background-color: green;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-            <div class="parcel-list center">
-                  <h2>List of parcel status</h2>
-                  <table class="table">
-                        <thead>
-                              <tr>
-                                    <th scope="col">💀</th>
-                                    <th scope="col">Tracking Number</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Postcode</th>
-                                    <th scope="col">Date Posted</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              @foreach ($parcels as $row)
-                              <tr>
-                                    <th scope="row">
-                                          {{ $loop->index + 1 }}
-                                    </th>
-                                    <td>{{ $row->tracking_number }}</td>
-                                    <td>{{ $row->recipient_address }}</td>
-                                    <td>{{ $row->recipient_postcode }}</td>
-                                    <td>{{ $row->created_at->format('d\/m\/y') }}</td>
-                              </tr>
-                              @endforeach
-                        </tbody>
-                    
-                  </table>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel in Transit</h5>
+
+                        <table class="table table-striped align-items-center table-flush showDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tracking Number</th>
+                                    <th>Recipient Name</th>
+                                    <th>Address</th>
+                                    <th>Postcode</th>
+                                    <th>Date Created</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($parcels as $parcel)
+                                <tr>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_postcode }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y') }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
             </div>
-      </main>
+        </div>
+    </div>
+</div>
 
-</body>
+@include('layout.navbars.footer')
 
-</html>
+@endsection
