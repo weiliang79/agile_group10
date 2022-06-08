@@ -35,9 +35,9 @@ class CourierController extends Controller
             //return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
             return redirect()->route('courier.deliver_screen', compact('parcel'));
         } else if($parcel->status == Parcel::STATUS_DELIVERED){
-            return redirect()->back()->with('error', 'The parcel' . $parcel->tracking_number . ' are delivered.');
+            return redirect()->back()->with('error', 'The parcel ' . $parcel->tracking_number . ' are delivered.');
         } else {
-            return redirect()->back()->with('error', 'The parcel' . $parcel->tracking_number . ' status are not correct.');
+            return redirect()->back()->with('error', 'The parcel ' . $parcel->tracking_number . ' status are not correct.');
         }
     }
 
