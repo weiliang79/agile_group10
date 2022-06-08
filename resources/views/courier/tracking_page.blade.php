@@ -6,74 +6,45 @@
       <meta charset="utf-8">
       <title>Courier Tracking Page</title>
       <link rel="stylesheet" href="style.css">
+      <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets') }}/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
 </head>
 
 <body class="center">
-      <header>
-            <h2>Courier Tracking Page</h2>
-
-            <nav>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Tracking</a></li>
-                  <li><a href="#">nav 3</a></li>
-                  <li><a href="#">nav 4</a></li>
-            </nav>
-      </header>
-
+      
+            @include('courier._header')
       <main>
-
-            {{-- style sheet for table --}}
-            <!--<style>
-      table {
-        border-collapse: separate;
-        border-spacing: 20px 0;
-      }
-
-      th {
-        background-color: #4287f5;
-        color: white;
-      }
-      th,
-      td {
-        width: 150px;
-        text-align: center;
-        border: 1px solid black;
-        padding: 5px;
-      }
-      h2 {
-        color: #4287f5;
-      }
-    </style>-->
 
             <div class="parcel-list center">
                   <h2>List of parcel status</h2>
-                  <table border="1">
-                        <tr>
-                              <th>Tracking Number</th>
-                              <th>Weight</th>
-                              <th>Sender Name</th>
-                              <th>Sender Address</th>
-                              <th>Sender Postcode</th>
-                              <th>Recipient Name</th>
-                              <th>Recipient Address</th>
-                              <th>Recipient Postcode</th>
-                              <th>Recipient Phone</th>
-
-                        </tr>
-                        <tr>
-                              <td class="td">10001</td>
-                              <td>20</td>
-                              <td>Tom</td>
-                              <td>Block 18-30-B Gurney Tower Persiaran Gurney 10250 Penang Penang Malaysia</td>
-                              <td>10250</td>
-                              <td>Jerry</td>
-                              <td>Bangunan Krematoriam Jln 51A/229 Kampung Baiduri 46100 46100 Malaysia</td>
-                              <td>46100</td>
-                              <td>012-3456789</td>
-                        </tr>
+                  <table class="table">
+                        <thead>
+                              <tr>
+                                    <th scope="col">💀</th>
+                                    <th scope="col">Tracking Number</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Postcode</th>
+                                    <th scope="col">Date Posted</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              @foreach ($parcels as $row)
+                              <tr>
+                                    <th scope="row">
+                                          {{ $loop->index + 1 }}
+                                    </th>
+                                    <td>{{ $row->tracking_number }}</td>
+                                    <td>{{ $row->recipient_address }}</td>
+                                    <td>{{ $row->recipient_postcode }}</td>
+                                    <td>{{ $row->created_at->format('d\/m\/y') }}</td>
+                              </tr>
+                              @endforeach
+                        </tbody>
+                    
                   </table>
             </div>
       </main>
+
 </body>
 
 </html>

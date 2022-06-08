@@ -73,4 +73,14 @@ class CourierController extends Controller
         $parcel_details->save();
         return redirect()->route('home')->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to delivered status.');
     }
+
+    public function trackingPage (Request $request){
+        $parcels = Parcel::where('courier_id', auth()->user()->id) -> where('status', Parcel::STATUS_IN_TRANSIT)->get();
+
+    
+        return view('courier.tracking_page', compact('parcels')) ;
+    }
+
+
+
 }
