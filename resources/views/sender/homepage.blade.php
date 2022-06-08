@@ -73,43 +73,41 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
             <div class="card" style="border-radius: 1rem;">
-                <div class="row g-0">
-                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                        <div class="card-body p-4 p-lg-5 text-black">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel Status</h5>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel Status</h5>
 
-                            <table class="table align-items-center table-flush showDataTable">
-                                <thead>
-                                    <tr>
-                                        <th>Tracking Number</th>
-                                        <th>Recipient Name</th>
-                                        <th>Recipient Address</th>
-                                        <th>Recipient Phone</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
+                        <table class="table align-items-center table-flush showDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tracking Number</th>
+                                    <th>Recipient Name</th>
+                                    <th>Recipient Address</th>
+                                    <th>Recipient Phone</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    @foreach($parcels as $parcel)
-                                    <tr>
-                                        <td>{{ $parcel->tracking_number }}</td>
-                                        <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
-                                        <td>{{ $parcel->recipient_address }}</td>
-                                        <td>{{ $parcel->recipient_phone }}</td>
-                                        @if($parcel->status == 1)
-                                        <td>Pending</td>
-                                        @elseif($parcel->status == 2)
-                                        <td>In Transit</td>
-                                        @elseif($parcel->status == 3)
-                                        <td>Delivered</td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+                            <tbody>
+                                @foreach($parcels as $parcel)
+                                <tr>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_phone }}</td>
+                                    @if($parcel->status == 1)
+                                    <td>Pending</td>
+                                    @elseif($parcel->status == 2)
+                                    <td>In Transit</td>
+                                    @elseif($parcel->status == 3)
+                                    <td>Delivered</td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
 
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
