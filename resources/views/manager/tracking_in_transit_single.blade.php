@@ -14,8 +14,26 @@
     @include('manager._header')
 
     <main class="container">
-        <div class="mx-auto" style="width: max-content">
-            <h2 class="my-5 text-center">{{$courier_name}} in transit</h2>
+        <div class="mx-auto">
+            <h2 class="mt-5 mb-3 text-center">Courier info:</h2>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <tr>
+                        <td style="width: 5rem">Name:</td>
+                        <td>{{ $courier->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5rem">Email:</td>
+                        <td>{{ $courier->email }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5rem">Phone:</td>
+                        <td>{{ $courier->phone }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2 class="my-5 text-center">Parcels in transit</h2>
             <table class="table">
                 <thead>
                     <tr>

@@ -31,11 +31,8 @@ class ManagerController extends Controller
         $parcels = Parcel::where('courier_id', $courier_id)
             ->where('status', Parcel::STATUS_IN_TRANSIT)
             ->get();
-        $courier_name = User::where('id', $courier_id)
-            ->get()
-            ->first()
-            ->first_name;
-        return view('manager.tracking_in_transit_single', ['parcels' => $parcels, 'courier_name' => $courier_name]);
+        $courier = $parcels->first()->courier;
+        return view('manager.tracking_in_transit_single', ['parcels' => $parcels, 'courier' => $courier]);
     }
 
     public function trackingNotDispatched() {
@@ -43,7 +40,7 @@ class ManagerController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
         $flagged = Parcel::where('status', Parcel::STATUS_NOT_DISPATCHED)
-            ->where('created_at', '<', Carbon::parse('-24hours'))
+            ->where('created_at', '<', Carbon::parse('-48hours'))
             ->orderBy('created_at', 'ASC')
             ->get();
         return view('manager.tracking_not_dispatched', ['parcels' => $parcels, 'flagged' => $flagged]);
