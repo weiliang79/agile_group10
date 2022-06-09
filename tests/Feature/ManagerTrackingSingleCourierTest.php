@@ -11,6 +11,8 @@ class ManagerTrackingSingleCourierTest extends TestCase
 {
     use RefreshDatabase;
 
+    const COURIER_USER_ID = 2;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -23,11 +25,11 @@ class ManagerTrackingSingleCourierTest extends TestCase
     {
         // get the first manager in database
         $user = User::manager()->first();
-        $response = $this->actingAs($user)->get(route("manager.tracking_single", ['courier_id' => 3]));
+        $response = $this->actingAs($user)->get(route("manager.tracking_single", [
+            'courier_id' => ManagerTrackingSingleCourierTest::COURIER_USER_ID
+        ]));
 
         $response->assertStatus(200);
         $response->assertSee("<h2>Manager Tracking Page</h2>", false);
-
-
     }
 }
