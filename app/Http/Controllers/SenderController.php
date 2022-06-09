@@ -25,21 +25,6 @@ class SenderController extends Controller
 
         $currentLoggedInId = Auth::user()->id;
 
-        /*$parcel = new Parcel;
-        $parcel->tracking_number = 0;
-        $parcel->weight = $request->weight;
-        $parcel->sender_id = $currentLoggedInId;
-        $parcel->sender_address = $request->sender_address;
-        $parcel->sender_postcode = $request->sender_postcode;
-        $parcel->recipient_firstname = $request->recipient_firstname;
-        $parcel->recipient_lastname = $request->recipient_lastname;
-        $parcel->recipient_address = $request->recipient_address;
-        $parcel->recipient_postcode = $request->recipient_postcode;
-        $parcel->recipient_phone = $request->recipient_phone;
-        $parcel->status = Parcel::STATUS_NOT_DISPATCHED;*/
-
-        //$parcel->save();
-
         $parcel = Parcel::create([
             'weight' => $request->weight,
             'sender_id' => $currentLoggedInId,
