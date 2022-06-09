@@ -14,6 +14,8 @@ class ManagerTrackingNotDispatchTest extends TestCase
 {
     use RefreshDatabase;
 
+    const NORMALUSER_USER_ID = 3;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -51,7 +53,7 @@ class ManagerTrackingNotDispatchTest extends TestCase
         return [
             'tracking_number' => $this->faker->numerify('P00000##'),
             'weight' => $this->faker->numerify(),
-            'sender_id' => 4,
+            'sender_id' => ManagerTrackingNotDispatchTest::NORMALUSER_USER_ID,
             'sender_address' => $this->faker->address(),
             'sender_postcode' => $this->faker->postcode(),
             'recipient_firstname' => $this->faker->firstName(),
