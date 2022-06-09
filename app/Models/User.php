@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return $query->where("role_id", Role::ROLE_MANAGER);
     }
+
+    public function scopeNormaluser($query) : Builder
+    {
+        return $query->where("role_id", Role::ROLE_NORMAL_USER);
+    }
 }
