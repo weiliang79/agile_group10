@@ -49,11 +49,11 @@
                                 </table>
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input class="form-control form-control-lg {{ $errors->has('receiver_name') ? 'is-invalid' : '' }}" type="text" id="receiverName" name="receiver_name" placeholder="Receiver Name" value="{{ old('receiver_name') }}">
+                            <div class="mb-4">
+                                <input class="form-control {{ $errors->has('receiver_name') ? 'is-invalid' : '' }}" type="text" id="receiverName" name="receiver_name" placeholder="Receiver Name" value="{{ old('receiver_name') }}">
                             </div>
 
-                            <div class="form-outline mb-4">
+                            <div class="">
                                 <canvas></canvas>
                             </div>
 
@@ -61,9 +61,9 @@
                             <input type="hidden" name="location" readonly required>
                             <input type="hidden" name="signature" readonly required>
 
-                            <div class="pt-1 mb-4">
-                                <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
-                                <button id="clearButton" class="btn btn-dark btn-lg btn-block" type="button">Clear</button>
+                            <div class="pt-1 ">
+                                <button class="btn btn-dark py-2 px-2" type="submit">Submit</button>
+                                <button id="clearButton" class="btn btn-dark py-2 px-2" type="button">Clear</button>
                             </div>
 
                         </form>
@@ -143,18 +143,6 @@
         backgroundColor: 'rgb(204, 204, 204)',
     });
     signaturePad.on();
-
-    function resizeCanvas() {
-        var ratio = Math.max(window.devicePixelRatio || 1, 1);
-
-        canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio;
-        canvas.getContext("2d").scale(ratio, ratio);
-
-        signaturePad.clear();
-    }
-    window.onresize = resizeCanvas;
-    resizeCanvas();
 
     var clearButton = document.getElementById('clearButton');
     var receviverName = document.getElementById('receiverName');
