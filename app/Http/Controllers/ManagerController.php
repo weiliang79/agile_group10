@@ -45,4 +45,13 @@ class ManagerController extends Controller
             ->get();
         return view('manager.tracking_not_dispatched', ['parcels' => $parcels, 'flagged' => $flagged]);
     }
+    
+    public function parcelDelivered() {
+        $parcels = Parcel::where('status', Parcel::STATUS_DELIVERED)
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        return view('manager.parcel_delivered', compact('parcels'));
+    }
+
 }
