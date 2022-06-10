@@ -1,45 +1,55 @@
-<!DOCTYPE html>
+@extends('layout.app')
 
-<html>
+@section('content')
 
-<head>
-    <meta charset="utf-8">
-    <title>Courier Tracking Page</title>
-    {{-- <link rel="stylesheet" href="{{ url('/style.css') }}"> --}}
-    <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets') }}/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
-</head>
+@include('layout.navbars.topnav')
 
-<body>
-    @include('manager._header')
+<div class="container-fluid py-5" style="background-color: green;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-    <main class="container">
-        <div class="mx-auto" style="width: max-content">
-            <h2 class="my-5 text-center">Couriers with parcel in transit</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">💀</th>
-                        <th scope="col">Courier name</th>
-                        <th scope="col">Number of parcel (in-transit)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($table as $row)
-                        <tr style="transform: rotate(0);">
-                            <th scope="row">
-                                <a href="{{ route('manager.tracking_single', ['courier_id' => $row->id]) }}"
-                                    class="stretched-link"></a>
-                                {{ $loop->index + 1 }}
-                            </th>
-                            <td>{{ $row->first_name }}</td>
-                            <td>{{ $row->total }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Couriers with Parcel in Transit</h5>
+
+                        <table class="table align-items-center table-flush showDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Courier Name</th>
+                                    <th>E-mail</th>
+                                    <th>Phone</th>
+                                    <th>Number of parcel (In Transit)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($couriers as $courier)
+                                <tr>
+                                    <td onclick="openURL(this);" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->first_name }} {{ $courier->last_name }}</td>
+                                    <td onclick="openURL(this);" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}"><a href="mailto:{{ $courier->email }}">{{ $courier->email }}</a></td>
+                                    <td onclick="openURL(this);" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->phone }}</td>
+                                    <td onclick="openURL(this);" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->courier_parcel->where('status', 2)->count() }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
-</body>
+    </div>
+</div>
 
-</html>
+@include('layout.navbars.footer')
+
+@endsection
+
+@push('js')
+<script>
+    function openURL(item) {
+        window.location = $(item).data('url');
+    }
+</script>
+@endpush

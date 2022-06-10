@@ -16,6 +16,20 @@
                     <a class="nav-link" href="{{ route('courier.tracking_page') }}">Tracking</a>
                 </li>
                 @endcan
+
+                @can('isManager')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('manager.tracking_not_dispatched') }}">Not Dispatched</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('manager.tracking_in_transit') }}">In Transit</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('manager.tracking_delivered') }}">Delivered</a>
+                </li>
+                @endcan
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav nav-item">
