@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->tinyInteger('gender');
             $table->string('phone');
-            $table->foreignId("role_id")->default(4);
+            $table->foreignId("role_id")->default(3);
             $table->foreign("role_id")->references("id")->on("roles")->onDelete("cascade");
             $table->rememberToken();
             $table->timestamps();

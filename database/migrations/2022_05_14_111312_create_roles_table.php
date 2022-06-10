@@ -23,10 +23,6 @@ return new class extends Migration
         });
 
         Role::create([
-            'role_name' => 'Super Admin',
-        ]);
-
-        Role::create([
             'role_name' => 'Manager',
         ]);
 
