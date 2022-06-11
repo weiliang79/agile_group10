@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\Role;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ManagerController extends Controller
+class ManagerController extends BaseController
 {
     public function trackingInTransit() {
         // returns courier information and in-transit parcel count

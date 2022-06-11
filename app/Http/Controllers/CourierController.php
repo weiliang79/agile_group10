@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CourierController extends Controller
+class CourierController extends BaseController
 {
     public function updateParcel(Request $request)
     {

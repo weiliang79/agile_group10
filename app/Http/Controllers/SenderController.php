@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SenderController extends Controller
+class SenderController extends BaseController
 {
 
     public function saveParcel(Request $request)

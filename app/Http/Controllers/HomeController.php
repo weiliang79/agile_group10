@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\Role;
 use Carbon\Carbon;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function index()
     {
