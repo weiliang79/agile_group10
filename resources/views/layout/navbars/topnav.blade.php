@@ -6,12 +6,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="collapseNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto">
+
+                @can('isNormalUser')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link" href="{{ route('normal_user.home') }}">Home</a>
                 </li>
+                @endcan
 
                 @can('isCourier')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('courier.home') }}">Home</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('courier.tracking_page') }}">Tracking</a>
                 </li>
@@ -30,11 +37,7 @@
                     <a class="nav-link" href="{{ route('manager.tracking_delivered') }}">Delivered</a>
                 </li>
                 @endcan
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav nav-item">
-                    <a class="nav-link" href="">About me</a>
-                </li>
+
                 <li class="nav nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">logout</a>
                 </li>
