@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
+use App\Models\ParcelDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -49,11 +50,16 @@ class SenderController extends BaseController
             'status' => Parcel::STATUS_NOT_DISPATCHED,
         ]);
 
+        $parcel->details()->create([
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'message' => 'Parcel details are created.',
+        ]);
+
         $parcel->tracking_number = SenderController::generateTrackingNumber($parcel->id);
         $parcel->save();
 
         // redirect to homepage
-        return redirect()->route('home')->with('success', 'Parcel details successfully saved.');
+        return redirect()->route('normal_user.home')->with('success', 'Parcel details successfully saved.');
     }
 
     function generateTrackingNumber($parcelId)
