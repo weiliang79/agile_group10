@@ -14,7 +14,15 @@ class LoginController extends BaseController
 
     public function index(){
         if(Auth::check()){
-            return redirect()->route('home');
+            if(Gate::allows('isManager')){
+                return redirect()->route('manager.home');
+            } else if(Gate::allows('isCourier')){
+                return redirect()->route('courier.home');
+            } else if(Gate::allows('isNormalUser')){
+                return redirect()->route('normal_user.home');
+            } else {
+                return redirect()->back()->with('error', 'System has occurred error, please contact system admin for further support.');
+            }
         }
         return view('auth.login');
     }
