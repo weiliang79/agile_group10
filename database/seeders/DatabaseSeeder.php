@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Parcel;
+use App\Models\ParcelDetails;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // User::factory(10)->create();
         $this->faker = Faker::create();
         Parcel::create([
             'tracking_number' => "P00000001",
@@ -31,7 +32,13 @@ class DatabaseSeeder extends Seeder
             'recipient_address' => $this->faker->address(),
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '1',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000002",
@@ -44,7 +51,13 @@ class DatabaseSeeder extends Seeder
             'recipient_address' => $this->faker->address(),
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '2',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000003",
@@ -57,7 +70,13 @@ class DatabaseSeeder extends Seeder
             'recipient_address' => $this->faker->address(),
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => \App\Models\Parcel::STATUS_NOT_DISPATCHED,
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '3',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000004",
@@ -71,7 +90,19 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
+            'status' => Parcel::STATUS_IN_TRANSIT,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '4',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '4',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000005",
@@ -85,7 +116,19 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
+            'status' => Parcel::STATUS_IN_TRANSIT,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '5',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '5',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000006",
@@ -99,7 +142,19 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_IN_TRANSIT,
+            'status' => Parcel::STATUS_IN_TRANSIT,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '6',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '6',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000007",
@@ -113,7 +168,25 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_DELIVERED,
+            'status' => Parcel::STATUS_DELIVERED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '7',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '7',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '7',
+            'status' => Parcel::STATUS_DELIVERED,
+            'location' => '5.3389487, 100.2712407',
+            'message' => 'Parcel Delivered.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000008",
@@ -127,7 +200,25 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_DELIVERED,
+            'status' => Parcel::STATUS_DELIVERED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '8',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '8',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '8',
+            'status' => Parcel::STATUS_DELIVERED,
+            'location' => '5.3389487, 100.2712407',
+            'message' => 'Parcel Delivered.',
         ]);
         Parcel::create([
             'tracking_number' => "P00000009",
@@ -141,7 +232,25 @@ class DatabaseSeeder extends Seeder
             'recipient_postcode' => $this->faker->numerify('1####'),
             'recipient_phone' => $this->faker->phoneNumber(),
             'courier_id' => Role::ROLE_COURIER,
-            'status' => \App\Models\Parcel::STATUS_DELIVERED,
+            'status' => Parcel::STATUS_DELIVERED,
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '9',
+            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'location' => '',
+            'message' => 'Parcel details are created.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '9',
+            'status' => Parcel::STATUS_IN_TRANSIT,
+            'location' => '',
+            'message' => 'Parcel are in transit.',
+        ]);
+        ParcelDetails::create([
+            'parcel_id' => '9',
+            'status' => Parcel::STATUS_DELIVERED,
+            'location' => '5.3389487, 100.2712407',
+            'message' => 'Parcel Delivered.',
         ]);
     }
 }
