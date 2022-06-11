@@ -5,11 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use PDO;
 
 class CourierController extends BaseController
 {
+
+    public function index(){
+        if(Gate::allows('isCourier')){
+            $parcels = Parcel::where('courier_id', Auth::user()->id)
+                    ->where('status', Parcel::STATUS_IN_TRANSIT)
+                    ->get();
+                $now = Carbon::now();
+                $parcels->each(function ($parcel) use ($now) {
+                    $parcel->elapsed_time = $parcel->created_at->diffInHours($now, false);
+                });
+                return view('courier.homepage', ['parcels' => $parcels]);
+        }
+        abort(403);
+    }
+
     public function updateParcel(Request $request)
     {
         //dd($request);

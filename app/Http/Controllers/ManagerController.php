@@ -10,9 +10,18 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ManagerController extends BaseController
 {
+
+    public function index(){
+        if(Gate::allows('isManager')){
+            return redirect()->route('manager.tracking_in_transit');
+        }
+        abort(403);
+    }
+
     public function trackingInTransit() {
         // returns courier information and in-transit parcel count
         // , except courier with no in-transit parcel

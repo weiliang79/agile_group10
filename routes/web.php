@@ -40,10 +40,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
 
     Route::group(['middleware' => ['can:isNormalUser']], function () {
+        Route::get('/normal_user/home', [SenderController::class, 'index'])->name('normal_user.home');
         Route::post('/normal_user/save_parcel', [SenderController::class, 'saveParcel'])->name('normal_user.save_parcel');
     });
 
     Route::group(['middleware' => ['can:isCourier']], function () {
+        Route::get('/courier/home', [CourierController::class, 'index'])->name('courier.home');
         Route::post('/courier/update_parcel', [CourierController::class, 'updateParcel'])->name('courier.update_parcel');
         Route::get('/courier/{parcel:tracking_number}/deliver_screen', [CourierController::class, 'deliverScreen'])->name('courier.deliver_screen');
         Route::post('/courier/deliver_screen_submit', [CourierController::class, 'deliverScreenSubmit'])->name('courier.deliver_screen_submit');
@@ -52,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['can:isManager']], function () {
+        Route::get('/manager/home', [ManagerController::class, 'index'])->name('manager.home');
         Route::get('/manager/tracking_in_transit', [ManagerController::class, 'trackingInTransit'])->name('manager.tracking_in_transit');
         Route::get('/manager/tracking_single/{courier_id}', [ManagerController::class, 'trackingInTransitSingle'])->name('manager.tracking_single');
         Route::get('/manager/tracking_not_dispatched', [ManagerController::class, 'trackingNotDispatched'])->name('manager.tracking_not_dispatched');

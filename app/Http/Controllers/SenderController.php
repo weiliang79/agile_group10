@@ -6,13 +6,23 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class SenderController extends BaseController
 {
 
+    public function index()
+    {
+        if (Gate::allows('isNormalUser')) {
+            $parcels = Parcel::where('sender_id', Auth::user()->id)->get();
+            return view('sender.homepage', compact('parcels'));
+        }
+        abort(403);
+    }
+
     public function saveParcel(Request $request)
     {
-        
+
         $request->validate([
             'sender_address' => 'required',
             "sender_postcode" => "required",
@@ -50,5 +60,4 @@ class SenderController extends BaseController
     {
         return 'P' . str_pad($parcelId, 8, "0", STR_PAD_LEFT);
     }
-
 }
