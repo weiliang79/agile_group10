@@ -26,6 +26,7 @@ Route::group(['middleware' => ['guest']], function () {
 
     //landing page
     Route::get('/', [LandingController::class, "index"])->name('landing');
+    Route::get('/tracking', [LandingController::class, 'tracking'])->name('landing.tracking');
 
     //login & logout
     Route::get('/login', [LoginController::class, 'index'])->name('login');

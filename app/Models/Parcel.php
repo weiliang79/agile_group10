@@ -43,7 +43,7 @@ class Parcel extends Model
 
     public function details()
     {
-        return $this->hasMany(Parcel_Details::class);
+        return $this->hasMany(ParcelDetails::class);
     }
 
     public function sender()
