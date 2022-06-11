@@ -36,7 +36,6 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [LoginController::class, 'destory'])->name('logout');
 
     Route::group(['middleware' => ['can:isNormalUser']], function () {
