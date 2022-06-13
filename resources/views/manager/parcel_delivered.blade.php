@@ -37,7 +37,7 @@
                                     <td>{{ $parcel->recipient_phone }}</td>
                                     <td>{{ $parcel->courier->first_name }} {{ $parcel->courier->last_name }}</td>
                                     <td>{{ $parcel->created_at->format('d\/m\/y g:i A') }}</td>
-                                    <td>{{ $parcel->details()->where('status', 3)->first()->created_at->format('d\/m\/y g:i A') }}</td>
+                                    <td>{{ $parcel->details()->where('status', 4)->first()->created_at->format('d\/m\/y g:i A') }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

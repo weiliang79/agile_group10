@@ -44,13 +44,21 @@ class CourierController extends BaseController
         }
 
         //dd($parcel);
-
-        if ($parcel->status == Parcel::STATUS_NOT_DISPATCHED) {
+        if($parcel->status == Parcel::STATUS_NOT_PICK_UP){
+            $parcel->status = Parcel::STATUS_NOT_DISPATCHED;
+            $parcel->courier_id = Auth::user()->id;
+            $parcel->details()->create([
+                'status' => Parcel::STATUS_IN_TRANSIT,
+                'message' => 'Courier has been assigned to handle the parcel.',
+            ]);
+            $parcel->save();
+            return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to not dispatched status.');
+        } else if ($parcel->status == Parcel::STATUS_NOT_DISPATCHED) {
             $parcel->status = Parcel::STATUS_IN_TRANSIT;
             $parcel->courier_id = Auth::user()->id;
             $parcel->details()->create([
                 'status' => Parcel::STATUS_IN_TRANSIT,
-                'message' => 'Parcel are in transit.',
+                'message' => 'Parcel is in transit.',
             ]);
             $parcel->save();
             return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to in-transit status.');

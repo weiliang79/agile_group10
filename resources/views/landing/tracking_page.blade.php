@@ -51,7 +51,7 @@
                                     <ul class="timeline-with-icons">
 
                                           @foreach($parcelDetails as $detail)
-                                          @if($detail->status == 3)
+                                          @if($detail->status == 4)
                                           <li class="timeline-item mb-5">
                                                 <span class="timeline-icon">
                                                       <i class="fa-solid fa-person-circle-check"></i>
@@ -65,11 +65,22 @@
                                           </li>
                                           @endif
 
-                                          @if($detail->status == 2)
+                                          @if($detail->status == 3)
                                           <li class="timeline-item mb-5">
 
                                                 <span class="timeline-icon">
                                                       <i class="fa-solid fa-truck-fast"></i>
+                                                </span>
+                                                <h5 class="fw-bold">{{ $detail->message }}</h5>
+                                                <p class="text-muted mb-2 fw-bold">{{ $detail->created_at->format("d\/m\/y") }}</p>
+                                          </li>
+                                          @endif
+
+                                          @if($detail->status == 2)
+                                          <li class="timeline-item mb-5">
+
+                                                <span class="timeline-icon">
+                                                      <i class="fa-solid fa-person-circle-check"></i>
                                                 </span>
                                                 <h5 class="fw-bold">{{ $detail->message }}</h5>
                                                 <p class="text-muted mb-2 fw-bold">{{ $detail->created_at->format("d\/m\/y") }}</p>

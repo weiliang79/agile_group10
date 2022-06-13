@@ -23,7 +23,7 @@
                                     class="stretched-link"></a></td>
                             <td>{{ $courier->email }}</td>
                             <td>{{ $courier->phone }}</td>
-                            <td>{{ $courier->courier_parcel->where('status', 2)->count() }}</td>
+                            <td>{{ $courier->courier_parcel->where('status', 3)->count() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
