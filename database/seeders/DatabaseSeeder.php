@@ -8,10 +8,12 @@ use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\LaravelIgnition\Support\Composer\FakeComposer;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 class DatabaseSeeder extends Seeder
 {
+    const COURIER_ID = 2;
+
     /**
      * Seed the application's database.
      *
@@ -20,348 +22,153 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
-        $this->faker = Faker::create();
-        Parcel::create([
-            'tracking_number' => "P00000001",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => Parcel::STATUS_NOT_PICK_UP,
+
+        //init
+        $this->faker = app(Generator::class);
+
+        // 01
+        Parcel::factory()->create([
+            'tracking_number' => 'P00000001'
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '1',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
+        $this->parcel_detail_not_pickup(1);
+
+        // 02
+        Parcel::factory()->create([
+            'tracking_number' => 'P00000002'
         ]);
-        Parcel::create([
-            'tracking_number' => "P00000002",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => Parcel::STATUS_NOT_PICK_UP,
+        $this->parcel_detail_not_pickup(2);
+
+        // 03
+        Parcel::factory()->create([
+            'tracking_number' => 'P00000003'
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '2',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        Parcel::create([
-            'tracking_number' => "P00000003",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '3',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(3);
+
+        // 04
+        Parcel::factory()->create([
             'tracking_number' => "P00000004",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_NOT_DISPATCHED,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '4',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '4',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(4);
+        $this->parcel_detail_not_dispatched(4);
+
+        // 05
+        Parcel::factory()->create([
             'tracking_number' => "P00000005",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_NOT_DISPATCHED,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '5',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '5',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(5);
+        $this->parcel_detail_not_dispatched(5);
+
+        // 06
+        Parcel::factory()->create([
             'tracking_number' => "P00000006",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_NOT_DISPATCHED,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '6',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '6',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(6);
+        $this->parcel_detail_not_dispatched(6);
+
+        // 07
+        Parcel::factory()->create([
             'tracking_number' => "P00000007",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_IN_TRANSIT,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '7',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '7',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '7',
-            'status' => Parcel::STATUS_IN_TRANSIT,
-            'location' => '',
-            'message' => 'Parcel is in transit.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(7);
+        $this->parcel_detail_not_dispatched(7);
+        $this->parcel_detail_in_transit(7);
+
+        // 08
+        Parcel::factory()->create([
             'tracking_number' => "P00000008",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_IN_TRANSIT,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '8',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '8',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '8',
-            'status' => Parcel::STATUS_IN_TRANSIT,
-            'location' => '',
-            'message' => 'Parcel is in transit.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(8);
+        $this->parcel_detail_not_dispatched(8);
+        $this->parcel_detail_in_transit(8);
+
+        // 09
+        Parcel::factory()->create([
             'tracking_number' => "P00000009",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_IN_TRANSIT,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '9',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '9',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '9',
-            'status' => Parcel::STATUS_IN_TRANSIT,
-            'location' => '',
-            'message' => 'Parcel is in transit.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(9);
+        $this->parcel_detail_not_dispatched(9);
+        $this->parcel_detail_in_transit(9);
+
+        // 10
+        Parcel::factory()->create([
             'tracking_number' => "P00000010",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_DELIVERED,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '10',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '10',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '10',
-            'status' => Parcel::STATUS_IN_TRANSIT,
-            'location' => '',
-            'message' => 'Parcel is in transit.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '10',
-            'status' => Parcel::STATUS_DELIVERED,
-            'location' => '5.3389487, 100.2712407',
-            'message' => 'Parcel delivered.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(10);
+        $this->parcel_detail_not_dispatched(10);
+        $this->parcel_detail_in_transit(10);
+        $this->parcel_detail_delivered(10);
+
+        // 11
+        Parcel::factory()->create([
             'tracking_number' => "P00000011",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_DELIVERED,
         ]);
-        ParcelDetails::create([
-            'parcel_id' => '11',
-            'status' => Parcel::STATUS_NOT_PICK_UP,
-            'location' => '',
-            'message' => 'Parcel details are created.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '11',
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
-            'location' => '',
-            'message' => 'Courier has been assigned to handle the parcel.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '11',
-            'status' => Parcel::STATUS_IN_TRANSIT,
-            'location' => '',
-            'message' => 'Parcel is in transit.',
-        ]);
-        ParcelDetails::create([
-            'parcel_id' => '11',
-            'status' => Parcel::STATUS_DELIVERED,
-            'location' => '5.3389487, 100.2712407',
-            'message' => 'Parcel delivered.',
-        ]);
-        Parcel::create([
+        $this->parcel_detail_not_pickup(11);
+        $this->parcel_detail_not_dispatched(11);
+        $this->parcel_detail_in_transit(11);
+        $this->parcel_detail_delivered(11);
+
+        // 12
+        Parcel::factory()->create([
             'tracking_number' => "P00000012",
-            'weight' => $this->faker->numerify(),
-            'sender_id' => Role::ROLE_NORMAL_USER,
-            'sender_address' => $this->faker->address(),
-            'sender_postcode' => $this->faker->numerify('1####'),
-            'recipient_firstname' => $this->faker->firstName(),
-            'recipient_lastname' => $this->faker->lastName(),
-            'recipient_address' => $this->faker->address(),
-            'recipient_postcode' => $this->faker->numerify('1####'),
-            'recipient_phone' => $this->faker->phoneNumber(),
-            'courier_id' => Role::ROLE_COURIER,
+            'courier_id' => self::COURIER_ID,
             'status' => Parcel::STATUS_DELIVERED,
         ]);
+        $this->parcel_detail_not_pickup(12);
+        $this->parcel_detail_not_dispatched(12);
+        $this->parcel_detail_in_transit(12);
+        $this->parcel_detail_delivered(12);
+    }
+
+    private function parcel_detail_not_pickup($parcel_id)
+    {
         ParcelDetails::create([
-            'parcel_id' => '12',
+            'parcel_id' => $parcel_id,
             'status' => Parcel::STATUS_NOT_PICK_UP,
             'location' => '',
             'message' => 'Parcel details are created.',
         ]);
+    }
+
+    private function parcel_detail_not_dispatched($parcel_id)
+    {
         ParcelDetails::create([
-            'parcel_id' => '12',
+            'parcel_id' => $parcel_id,
             'status' => Parcel::STATUS_NOT_DISPATCHED,
             'location' => '',
             'message' => 'Courier has been assigned to handle the parcel.',
         ]);
+    }
+
+    private function parcel_detail_in_transit($parcel_id)
+    {
         ParcelDetails::create([
-            'parcel_id' => '12',
+            'parcel_id' => $parcel_id,
             'status' => Parcel::STATUS_IN_TRANSIT,
             'location' => '',
             'message' => 'Parcel is in transit.',
         ]);
+    }
+
+    private function parcel_detail_delivered($parcel_id)
+    {
         ParcelDetails::create([
-            'parcel_id' => '12',
+            'parcel_id' => $parcel_id,
             'status' => Parcel::STATUS_DELIVERED,
             'location' => '5.3389487, 100.2712407',
             'message' => 'Parcel delivered.',
