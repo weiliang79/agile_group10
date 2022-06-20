@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +18,8 @@ class SenderController extends BaseController
     {
         if (Gate::allows('isNormalUser')) {
             $parcels = Parcel::where('sender_id', Auth::user()->id)->get();
-            return view('sender.homepage', compact('parcels'));
+            $couriers = User::where('role_id', Role::ROLE_COURIER)->get();
+            return view('sender.homepage', compact(['parcels', 'couriers']));
         }
         abort(403);
     }
@@ -33,6 +36,7 @@ class SenderController extends BaseController
             "recipient_postcode" => "required",
             "recipient_phone" => "required",
             "weight" => "required|numeric",
+            "courier_id" => "required|numeric",
         ]);
 
         $currentLoggedInId = Auth::user()->id;
@@ -48,6 +52,7 @@ class SenderController extends BaseController
             'recipient_postcode' => $request->recipient_postcode,
             'recipient_phone' => $request->recipient_phone,
             'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'courier_id' => $request->courier_id,
         ]);
 
         $parcel->details()->create([

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Parcel extends Model
 {
     use HasFactory, SoftDeletes;
-    const STATUS_NOT_PICK_UP = 1, STATUS_NOT_DISPATCHED = 2, STATUS_IN_TRANSIT = 3, STATUS_DELIVERED = 4;
+    const STATUS_NOT_PICK_UP = 1, STATUS_NOT_DISPATCHED = 2, STATUS_IN_TRANSIT = 3, STATUS_IN_DELIVER = 4, STATUS_DELIVERED = 5;
 
     protected $fillable = [
         'id',
