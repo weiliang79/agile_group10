@@ -4,7 +4,7 @@
 
 @include('layout.navbars.topnav')
 
-<div class="container-fluid py-5" style="background-color: black;">
+<div class="container-fluid py-5" style="background-color: lightblue;">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
             <div class="card" style="border-radius: 1rem;">
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="container-fluid py-5" style="background-color: green;">
+<div class="container-fluid py-5" style="background-color: lightblue;">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
             <div class="card" style="border-radius: 1rem;">
