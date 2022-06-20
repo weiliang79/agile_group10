@@ -8,7 +8,7 @@
         <div class="navbar-collapse collapse" id="collapseNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="{{ route('landing') }}">Home</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">

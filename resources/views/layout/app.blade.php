@@ -11,7 +11,7 @@
     <!--title-->
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Favicon -->
-    <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
+    <link href="{{ url('/favicon.ico') }}" rel="icon">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
 

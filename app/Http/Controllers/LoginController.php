@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
 
     public function index(){
         if(Auth::check()){
-            return redirect()->route('home');
+            if(Gate::allows('isManager')){
+                return redirect()->route('manager.home');
+            } else if(Gate::allows('isCourier')){
+                return redirect()->route('courier.home');
+            } else if(Gate::allows('isNormalUser')){
+                return redirect()->route('normal_user.home');
+            } else {
+                return redirect()->back()->with('error', 'System has occurred error, please contact system admin for further support.');
+            }
         }
         return view('auth.login');
     }
@@ -29,7 +39,16 @@ class LoginController extends Controller
             return redirect()->back()->with('error', "Wrong E-mail or Password! Please Try Again!");
         }
 
-        return redirect()->route('home');
+        if(Gate::allows('isManager')){
+            return redirect()->route('manager.home');
+        } else if(Gate::allows('isCourier')){
+            return redirect()->route('courier.home');
+        } else if(Gate::allows('isNormalUser')){
+            return redirect()->route('normal_user.home');
+        } else {
+            return redirect()->back()->with('error', 'System has occurred error, please contact system admin for further support.');
+        }
+
     }
 
     public function register(){

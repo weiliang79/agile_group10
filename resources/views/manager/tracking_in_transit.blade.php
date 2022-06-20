@@ -1,17 +1,7 @@
-<!DOCTYPE html>
+@extends('layout.app')
 
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Courier Tracking Page</title>
-    {{-- <link rel="stylesheet" href="{{ url('/style.css') }}"> --}}
-    <script src="{{ asset('assets') }}/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets') }}/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
-</head>
-
-<body>
-    @include('manager._header')
+@section('content')
+    @include('layout.navbars.topnav')
 
     <main class="container">
         <div class="mx-auto" style="width: max-content">
@@ -19,27 +9,37 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">💀</th>
-                        <th scope="col">Courier name</th>
-                        <th scope="col">Number of parcel (in-transit)</th>
+                        <th>Courier Name</th>
+                        <th>E-mail</th>
+                        <th>Phone</th>
+                        <th>Number of parcel (In Transit)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($table as $row)
+                    @foreach ($couriers as $courier)
                         <tr style="transform: rotate(0);">
-                            <th scope="row">
-                                <a href="{{ route('manager.tracking_single', ['courier_id' => $row->id]) }}"
-                                    class="stretched-link"></a>
-                                {{ $loop->index + 1 }}
-                            </th>
-                            <td>{{ $row->first_name }}</td>
-                            <td>{{ $row->total }}</td>
+                            <td>{{ $courier->first_name }}
+                                <a href="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}"
+                                    class="stretched-link"></a></td>
+                            <td>{{ $courier->email }}</td>
+                            <td>{{ $courier->phone }}</td>
+                            <td>{{ $courier->courier_parcel->where('status', 3)->count() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </main>
-</body>
 
-</html>
+    <div style="min-height: 260px;"></div>
+
+    @include('layout.navbars.footer')
+@endsection
+
+@push('js')
+    <script>
+        function openURL(item) {
+            window.location = $(item).data('url');
+        }
+    </script>
+@endpush

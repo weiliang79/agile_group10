@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('parcel_details', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('time');
-            $table->string('location');
-            $table->text('message')->nullable();
             $table->foreignId('parcel_id');
+            $table->integer('status');
+            $table->string('location')->nullable();
+            $table->text('message')->nullable();
+            $table->timestamps();
             $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('cascade');
             $table->softDeletes();
         });

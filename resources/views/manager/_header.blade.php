@@ -9,7 +9,7 @@
             <a class="nav-link" href="{{route('manager.tracking_in_transit')}}">in transit</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('manager.parcel_delivered') }}">delivered</a>
+            <a class="nav-link" href="{{ route('manager.tracking_delivered') }}">delivered</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/logout') }}">logout</a>

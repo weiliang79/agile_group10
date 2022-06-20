@@ -18,10 +18,10 @@
                 <div class="text-center text-white">
                     <!-- Page heading-->
                     <h1 class="mb-5">Track your parcel at here!</h1>
-                    <form action="" method="post">
+                    <form action="{{ route('landing.tracking') }}" method="get">
                         <div class="row">
                             <div class="col">
-                                <input class="form-control form-control-lg" type="text" name="" id="" placeholder="#00000000">
+                                <input class="form-control form-control-lg" type="text" name="tracking_number" id="" placeholder="P00000000">
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-primary btn-lg" type="submit">Submit</button>

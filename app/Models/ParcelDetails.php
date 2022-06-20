@@ -10,11 +10,10 @@ class ParcelDetails extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'time',
         'location',
+        'status',
         'message',
         'parcel_id',
     ];
