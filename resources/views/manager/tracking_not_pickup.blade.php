@@ -10,7 +10,7 @@
         <div class="col col-xl-10">
             <div class="card" style="border-radius: 1rem;">
                 <div class="d-flex align-items-center">
-                    <div class="card-body p-4 p-lg-5 text-black">
+                    <dsiv class="card-body p-4 p-lg-5 text-black">
 
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Flagged List of parcel not pickup</h5>
 
