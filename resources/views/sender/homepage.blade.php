@@ -2,66 +2,73 @@
 
 @section('content')
 
-    @include('layout.navbars.topnav')
+@include('layout.navbars.topnav')
 
-    <div class="container-fluid py-4">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-                <div class="card" style="border-radius: 1rem;">
-                    <div class="d-flex align-items-center">
-                        <div class="card-body p-4 p-lg-5 text-black">
-                            <form action="{{ route('normal_user.save_parcel') }}" method="post">
-                                @csrf
+<div class="container-fluid py-5" style="background-color: black;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-                                <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">New Parcel</h5>
+                        <form action="{{ route('normal_user.save_parcel') }}" method="post">
+                            @csrf
 
-                                @if ($errors->any())
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
+                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">New Parcel Info</h5>
 
-                                <input class="mb-2 form-control {{ $errors->has('sender_address') ? 'is-invalid' : '' }}"
-                                    type="text" name="sender_address" placeholder="Sender Address"
-                                    value="{{ old('sender_address') }}">
+                            @if($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
 
-                                <input class="mb-2 form-control {{ $errors->has('sender_postcode') ? 'is-invalid' : '' }}"
-                                    type="text" name="sender_postcode" placeholder="Sender Postcode"
-                                    value="{{ old('sender_postcode') }}">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('sender_address') ? 'is-invalid' : '' }}" type="text" name="sender_address" placeholder="Sender Address" value="{{ old('sender_address') }}">
+                            </div>
 
-                                <input
-                                    class="mb-2 form-control {{ $errors->has('recipient_firstname') ? 'is-invalid' : '' }}"
-                                    type="text" name="recipient_firstname" placeholder="Recipient First Name"
-                                    value="{{ old('recipient_firstname') }}">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('sender_postcode') ? 'is-invalid' : '' }}" type="text" name="sender_postcode" placeholder="Sender Postcode" value="{{ old('sender_postcode') }}">
+                            </div>
 
-                                <input
-                                    class="mb-2 form-control {{ $errors->has('recipient_lastname') ? 'is-invalid' : '' }}"
-                                    type="text" name="recipient_lastname" placeholder="Recipient Last Name"
-                                    value="{{ old('recipient_lastname') }}">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_firstname') ? 'is-invalid' : '' }}" type="text" name="recipient_firstname" placeholder="Recipient First Name" value="{{ old('recipient_firstname') }}">
+                            </div>
 
-                                <input
-                                    class="mb-2 form-control {{ $errors->has('recipient_address') ? 'is-invalid' : '' }}"
-                                    type="text" name="recipient_address" placeholder="Recipient Address"
-                                    value="{{ old('recipient_address') }}" autocomplete="address-line1">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_lastname') ? 'is-invalid' : '' }}" type="text" name="recipient_lastname" placeholder="Recipient Last Name" value="{{ old('recipient_lastname') }}">
+                            </div>
 
-                                <input
-                                    class="mb-2 form-control {{ $errors->has('recipient_postcode') ? 'is-invalid' : '' }}"
-                                    type="text" name="recipient_postcode" placeholder="Recipient Postcode"
-                                    value="{{ old('recipient_postcode') }}" autocomplete="postal-code">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_address') ? 'is-invalid' : '' }}" type="text" name="recipient_address" placeholder="Recipient Address" value="{{ old('recipient_address') }}" autocomplete="address-line1">
+                            </div>
 
-                                <input
-                                    class="mb-2 form-control {{ $errors->has('recipient_phone') ? 'is-invalid' : '' }}"
-                                    type="text" name="recipient_phone" placeholder="Recipient Phone"
-                                    value="{{ old('recipient_phone') }}">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_postcode') ? 'is-invalid' : '' }}" type="text" name="recipient_postcode" placeholder="Recipient Postcode" value="{{ old('recipient_postcode') }}" autocomplete="postal-code">
+                            </div>
 
-                                <input class="mb-2 form-control {{ $errors->has('weight') ? 'is-invalid' : '' }}"
-                                    type="text" name="weight" placeholder="Parcel Weight" value="{{ old('weight') }}">
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('recipient_phone') ? 'is-invalid' : '' }}" type="text" name="recipient_phone" placeholder="Recipient Phone" value="{{ old('recipient_phone') }}">
+                            </div>
 
-                                <button class="btn btn-dark mt-1 py-2 px-2" type="submit">Submit</button>
-                            </form>
-                        </div>
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg {{ $errors->has('weight') ? 'is-invalid' : '' }}" type="text" name="weight" placeholder="Parcel Weight" value="{{ old('weight') }}">
+                            </div>
+
+                            <label for="courier">Choose a courier:</label>
+                            <select name="courier_id" id="courier">
+                                @foreach($couriers as $courier)
+                                <option value="{{$courier->id}}">{{$courier->first_name}}</option>
+                                @endforeach
+                            </select>
+                            
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
             </div>
