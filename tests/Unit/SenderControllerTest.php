@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Http\Controllers\SenderController;
 use App\Models\User;
@@ -14,11 +14,19 @@ class SenderControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        // seed the database
+        $this->seed();
+    }
+
     public function test_send_parcel()
     {
         $users = User::normaluser()->first();
         $response = $this->actingAs($users)->post(route('normal_user.save_parcel'), $this->payload());
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('normal_user.home'));
     }
 
     private function payload()
@@ -32,6 +40,7 @@ class SenderControllerTest extends TestCase
             "recipient_postcode" => $this->faker->postcode(),
             "recipient_phone" => $this->faker->phoneNumber(),
             "weight" => $this->faker->randomNumber(2),
+            "courier_id" => User::courier()->first()->id
         ];
     }
 
