@@ -58,4 +58,18 @@ class ManagerController extends BaseController
         return view('manager.parcel_delivered', compact('parcels'));
     }
 
+
+    public function trackingNotPickUp(){
+        $parcels = Parcel::where('status',  Parcel::STATUS_NOT_PICK_UP)
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        $flagged = Parcel::where   ('status',Parcel::STATUS_NOT_PICK_UP)
+            ->where('created_at', '<', Carbon::parse('-48hours'))
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        return view('manager.tracking_not_pickup',['parcels' => $parcels, 'flagged' => $flagged]);
+    }
+
 }

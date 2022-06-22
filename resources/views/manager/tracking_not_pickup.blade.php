@@ -12,7 +12,7 @@
                 <div class="d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
 
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Flagged List of Parcel not Dispatched</h5>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Flagged List of parcel not pickup</h5>
 
                         <table class="table align-items-center table-flush showDataTable">
                             <thead>
@@ -55,7 +55,7 @@
                 <div class="d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
 
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel not Dispatched</h5>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel not pickup</h5>
 
                         <table class="table align-items-center table-flush showDataTable">
                             <thead>

@@ -25,6 +25,11 @@
                 @endcan
 
                 @can('isManager')
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('manager.tracking_not_pickup') }}">Not Pickup</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('manager.tracking_not_dispatched') }}">Not Dispatched</a>
                 </li>
