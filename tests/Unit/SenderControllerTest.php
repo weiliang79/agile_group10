@@ -22,11 +22,29 @@ class SenderControllerTest extends TestCase
         $this->seed();
     }
 
+    /**
+     * kaiming
+     */
+    public function test_index()
+    {
+
+    }
+
+    /**
+     * kaiming
+     */
     public function test_send_parcel()
     {
         $users = User::normaluser()->first();
         $response = $this->actingAs($users)->post(route('normal_user.save_parcel'), $this->payload());
         $response->assertRedirect(route('normal_user.home'));
+    }
+
+    /**
+     * kaiming
+     */
+    public function test_genarate_tracking_number()
+    {
     }
 
     private function payload()

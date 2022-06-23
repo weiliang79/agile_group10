@@ -18,7 +18,38 @@ class ManagerControllerTest extends TestCase
         // seed the database
         $this->seed();
     }
-    
+
+    /**
+     * ling xiao
+     */
+    public function test_index()
+    {
+    }
+
+    /**
+     * ling xiao
+     */
+    public function test_tracking_in_transit()
+    {
+    }
+
+    /**
+     * ling xiao
+     */
+    public function test_tracking_in_transit_single()
+    {
+    }
+
+    /**
+     * ling xiao
+     */
+    public function test_tracking_not_dispatch()
+    {
+    }
+
+    /**
+     * jiasheng
+     */
     public function test_tracking_delivered()
     {
         $users = User::manager()->first();
@@ -26,33 +57,4 @@ class ManagerControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Parcel Delivered');
     }
-    
-    /**
-     * ling xiao
-     */
-    public function test_index()
-    {
-    }
-    
-    /**
-     * ling xiao
-     */
-    public function test_tracking_in_transit()
-    {
-    }
-    
-    /**
-     * ling xiao
-     */
-    public function test_tracking_in_transit_single()
-    {
-    }
-    
-    /**
-     * ling xiao
-     */
-    public function test_tracking_not_dispatch()
-    {
-    }
-    
 }

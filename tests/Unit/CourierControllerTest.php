@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class LoginControllerTest extends TestCase
+class CourierControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -24,38 +24,38 @@ class LoginControllerTest extends TestCase
      */
     public function test_index()
     {
+        
     }
 
     /**
      * weiliang
      */
-    public function test_process()
+    public function test_update_parcel()
     {
+        
     }
 
     /**
-     * jiasheng
+     * kaiming
      */
-    public function test_register()
+    public function test_deliver_screen()
     {
-        $users = User::manager()->first();
-        // dd($users);
-        $response = $this->actingAs($users)->get(route('register'));
-        $response->assertStatus(302);
-        $response->assertRedirect('home');
+        
     }
 
     /**
-     * jiasheng
+     * kaiming
      */
-    public function test_register_process()
+    public function test_deliver_screen_submit()
     {
+        
     }
 
     /**
-     * weiliang
+     * kaiming
      */
-    public function test_destroy()
+    public function test_tracking_page()
     {
+        
     }
 }
