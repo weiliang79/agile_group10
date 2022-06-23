@@ -22,10 +22,10 @@
                             <tbody>
                                 @foreach ($couriers as $courier)
                                 <tr style="transform: rotate(0);">
-                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->first_name }} {{ $courier->last_name }}</td>
-                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->email }}</td>
-                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->phone }}</td>
-                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_single', ['courier_id' => $courier->id]) }}">{{ $courier->courier_parcel->where('status', 3)->count() }}</td>
+                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_in_transit_single', ['courier_id' => $courier->id]) }}">{{ $courier->first_name }} {{ $courier->last_name }}</td>
+                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_in_transit_single', ['courier_id' => $courier->id]) }}">{{ $courier->email }}</td>
+                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_in_transit_single', ['courier_id' => $courier->id]) }}">{{ $courier->phone }}</td>
+                                    <td onclick="openURL()" data-url="{{ route('manager.tracking_in_transit_single', ['courier_id' => $courier->id]) }}">{{ $courier->courier_parcel->where('status', 3)->count() }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
