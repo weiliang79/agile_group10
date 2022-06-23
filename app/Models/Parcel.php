@@ -46,6 +46,10 @@ class Parcel extends Model
         return $this->hasMany(ParcelDetails::class);
     }
 
+    public function request(){
+        return $this->hasMany(ParcelRequest::class);
+    }
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');

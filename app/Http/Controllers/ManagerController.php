@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
+use App\Models\ParcelRequest;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -70,6 +71,31 @@ class ManagerController extends BaseController
             ->get();
 
         return view('manager.tracking_not_pickup',['parcels' => $parcels, 'flagged' => $flagged]);
+    }
+
+    public function trackingNotPickupSingle($parcel_id){
+        $parcel = Parcel::find($parcel_id);
+
+        $couriers = User::where('role_id', Role::ROLE_COURIER)->get();
+
+        return view('manager.tracking_not_pickup_single', compact('parcel', 'couriers'));
+    }
+
+    public function trackingNotPickupSingleProcess(Request $request){
+        //dd($request);
+
+        if($request->courier_id == 0){
+            return redirect()->back()->with('error', 'Please select a valid courier.');
+        }
+
+        $parcel = Parcel::find($request->parcel_id);
+
+        $parcelRequest = $parcel->request()->create([
+            'courier_id' => $request->courier_id,
+            'status' => ParcelRequest::STATUS_PENDING,
+        ]);
+
+        return redirect()->route('manager.tracking_not_pickup')->with('success', 'The selected courier has been associated to the parcel.');
     }
 
 }

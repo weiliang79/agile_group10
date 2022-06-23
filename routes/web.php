@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/manager/tracking_delivered', [ManagerController::class, 'trackingDelivered'])->name('manager.tracking_delivered');
         Route::get('/manager/tracking_not_pickup', [ManagerController::class,'trackingNotPickUp'])->name('manager.tracking_not_pickup');
         Route::get('/manager/tracking_not_pickup_single/{parcel_id}', [ManagerController::class, 'trackingNotPickupSingle'])->name('manager.tracking_not_pickup_single');
+        Route::post('manager/tracking_not_pickup_single/process', [ManagerController::class, 'trackingNotPickupSingleProcess'])->name('manager.tracking_not_pickup_single.process');
     });
     
 });
