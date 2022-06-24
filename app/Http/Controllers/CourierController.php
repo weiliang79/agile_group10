@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
+use App\Models\ParcelRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,7 @@ class CourierController extends BaseController
         }
 
         //dd($parcel);
-        if($parcel->status == Parcel::STATUS_NOT_PICK_UP){
+        if ($parcel->status == Parcel::STATUS_NOT_PICK_UP) {
             $parcel->status = Parcel::STATUS_NOT_DISPATCHED;
             $parcel->courier_id = Auth::user()->id;
             $parcel->details()->create([
@@ -114,5 +115,32 @@ class CourierController extends BaseController
 
 
         return view('courier.tracking_page', compact('parcels'));
+    }
+
+    public function parcelRequestList()
+    {
+        $parcelRequests = ParcelRequest::where('courier_id', auth()->user()->id)
+            ->where('status', ParcelRequest::STATUS_PENDING)->get();
+        // dd($parcelRequest->all());
+        return view('courier.parcel_request', compact('parcelRequests'));
+    }
+
+    public function parcelRequestRespond(Request $request)
+    {
+        $request->validate([
+            'action' => 'required',
+            'request_id' => 'required|numeric'
+        ]);
+        $parcelRequest = ParcelRequest::find($request->request_id);
+        if ($parcelRequest->status != ParcelRequest::STATUS_PENDING) {
+            return redirect()->back();
+        }
+        if ($request->action == 'accept') {
+            $parcelRequest->status = ParcelRequest::STATUS_ACCEPT;
+        } else if ($request->action == 'reject') {
+            $parcelRequest->status = ParcelRequest::STATUS_DECLINE;
+        }
+        $parcelRequest->save();
+        return redirect()->back();
     }
 }

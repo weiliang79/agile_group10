@@ -18,10 +18,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('courier.home') }}">Home</a>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('courier.tracking_page') }}">Tracking</a>
                 </li>
+                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('courier.parcel_request_list') }}">Parcel Request</a>
+                                </li>
                 @endcan
 
                 @can('isManager')

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Parcel;
 use App\Models\ParcelDetails;
+use App\Models\ParcelRequest;
+use Carbon\Carbon;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
 
@@ -166,6 +168,53 @@ class ParcelSeeder extends Seeder
         $this->parcel_detail_in_transit(15);
         $this->parcel_detail_in_deliver(15);
         $this->parcel_detail_delivered(15);
+
+        // 16 onwards are for parcel request
+        
+        //16 not pick up > 48 hours
+        Parcel::factory()->create([
+            'tracking_number' => "P00000016",
+            'courier_id' => self::COURIER3_ID,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
+            'created_at' => Carbon::parse('-48hours')
+        ]);
+        $this->parcel_detail_not_pickup(16);
+
+        //17 not pick up > 48 hours
+        Parcel::factory()->create([
+            'tracking_number' => "P00000017",
+            'courier_id' => self::COURIER3_ID,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
+            'created_at' => Carbon::parse('-48hours')
+        ]);
+        $this->parcel_detail_not_pickup(17);
+
+        //18 not pickup with parcel request
+        $parcel = Parcel::factory()->create([
+            'tracking_number' => "P00000018",
+            'courier_id' => self::COURIER3_ID,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
+            'created_at' => Carbon::parse('-48hours')
+        ]);
+        $this->parcel_detail_not_pickup(18);
+        $parcel->request()->create([
+            'courier_id' => $parcel->courier_id,
+            'status' => ParcelRequest::STATUS_PENDING,
+        ]);
+
+        //19 not pickup with parcel request
+        $parcel = Parcel::factory()->create([
+            'tracking_number' => "P00000019",
+            'courier_id' => self::COURIER3_ID,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
+            'created_at' => Carbon::parse('-48hours')
+        ]);
+        $this->parcel_detail_not_pickup(19);
+        $parcel->request()->create([
+            'courier_id' => $parcel->courier_id,
+            'status' => ParcelRequest::STATUS_PENDING,
+        ]);
+
     }
 
     private function parcel_detail_not_pickup($parcel_id)
