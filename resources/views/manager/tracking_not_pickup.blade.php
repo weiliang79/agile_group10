@@ -38,11 +38,11 @@
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->created_at->format('d\/m\/y') }}</td>
                                     @if($parcel->request()->whereIn('status', [1, 2, 3])->count() == 0)
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Not assigned</td>
-                                    @elseif($parcel->request()->first()->status == 1)
+                                    @elseif($parcel->request()->orderBy('created_at', 'DESC')->first()->status == 1)
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Pending</td>
-                                    @elseif($parcel->request()->first()->status == 2)
+                                    @elseif($parcel->request()->orderBy('created_at', 'DESC')->first()->status == 2)
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Accepted</td>
-                                    @elseif($parcel->request()->first()->status == 3)
+                                    @elseif($parcel->request()->orderBy('created_at', 'DESC')->first()->status == 3)
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Declined</td>
                                     @else
                                     <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Error</td>
