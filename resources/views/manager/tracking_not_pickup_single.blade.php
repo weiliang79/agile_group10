@@ -83,6 +83,12 @@
                                                 </select>
                                           </div>
                                           @elseif($parcel->request()->orderBy('created_at', 'DESC')->first()->status == 3)
+                                          <div class="mb-4">
+                                                <p>Last Courier Assigned: {{ $parcel->request()->orderBy('created_at', 'DESC')->first()->courier->first_name }} {{ $parcel->request()->orderBy('created_at', 'DESC')->first()->courier->last_name }}</p>
+                                                <p>Reason Reject: {{ $parcel->request()->orderBy('created_at', 'DESC')->first()->reason }}</p>
+                                          </div>
+
+
                                           <div class="form-outline mb-4">
                                                 <select class="form-select" name="courier_id">
                                                       <option value="0" selected>Select a courier to assign</option>
