@@ -25,7 +25,7 @@ class ManagerTrackingSingleCourierTest extends TestCase
     {
         // get the first manager in database
         $user = User::manager()->first();
-        $response = $this->actingAs($user)->get(route("manager.tracking_single", [
+        $response = $this->actingAs($user)->get(route("manager.tracking_in_transit_single", [
             'courier_id' => ManagerTrackingSingleCourierTest::COURIER_USER_ID
         ]));
 

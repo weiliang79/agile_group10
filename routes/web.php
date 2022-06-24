@@ -56,10 +56,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['can:isManager']], function () {
         Route::get('/manager/home', [ManagerController::class, 'index'])->name('manager.home');
         Route::get('/manager/tracking_in_transit', [ManagerController::class, 'trackingInTransit'])->name('manager.tracking_in_transit');
-        Route::get('/manager/tracking_single/{courier_id}', [ManagerController::class, 'trackingInTransitSingle'])->name('manager.tracking_single');
+        Route::get('/manager/tracking_in_transit_single/{courier_id}', [ManagerController::class, 'trackingInTransitSingle'])->name('manager.tracking_in_transit_single');
         Route::get('/manager/tracking_not_dispatched', [ManagerController::class, 'trackingNotDispatched'])->name('manager.tracking_not_dispatched');
         Route::get('/manager/tracking_delivered', [ManagerController::class, 'trackingDelivered'])->name('manager.tracking_delivered');
         Route::get('/manager/tracking_not_pickup', [ManagerController::class,'trackingNotPickUp'])->name('manager.tracking_not_pickup');
+        Route::get('/manager/tracking_not_pickup_single/{parcel_id}', [ManagerController::class, 'trackingNotPickupSingle'])->name('manager.tracking_not_pickup_single');
+        Route::post('manager/tracking_not_pickup_single/process', [ManagerController::class, 'trackingNotPickupSingleProcess'])->name('manager.tracking_not_pickup_single.process');
     });
     
 });

@@ -46,6 +46,10 @@ class Parcel extends Model
         return $this->hasMany(ParcelDetails::class);
     }
 
+    public function request(){
+        return $this->hasMany(ParcelRequest::class);
+    }
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
@@ -54,5 +58,29 @@ class Parcel extends Model
     public function courier()
     {
         return $this->belongsTo(User::class, 'courier_id');
+    }
+
+    public static function getReadableStatus($parcel_id)
+    {
+        switch ($parcel_id) {
+            case Parcel::STATUS_NOT_PICK_UP:
+                return "Not Pickup";
+                break;
+            case Parcel::STATUS_NOT_DISPATCHED:
+                return "Not Dispatched";
+                break;
+            case Parcel::STATUS_IN_TRANSIT:
+                return "In Transit";
+                break;
+            case Parcel::STATUS_IN_DELIVER:
+                return "In Deliver";
+                break;
+            case Parcel::STATUS_DELIVERED:
+                return "Delivered";
+                break;
+            default:
+                "Status Invalid!";
+                break;
+        }
     }
 }

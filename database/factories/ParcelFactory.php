@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Parcel;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class ParcelFactory extends Factory
         return [
             'tracking_number' => "P00000000",
             'weight' => $this->faker->numerify('##'),
-            'sender_id' => 3,
+            'sender_id' => User::where('role_id', Role::ROLE_NORMAL_USER)->get()->first(),
             'sender_address' => $this->faker->address(),
             'sender_postcode' => $this->faker->postcode(),
             'recipient_firstname' => $this->faker->firstName(),

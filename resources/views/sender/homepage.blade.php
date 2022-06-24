@@ -103,13 +103,7 @@
                                             </td>
                                             <td>{{ $parcel->recipient_address }}</td>
                                             <td>{{ $parcel->recipient_phone }}</td>
-                                            @if ($parcel->status == 1)
-                                                <td>Pending</td>
-                                            @elseif($parcel->status == 2)
-                                                <td>In Transit</td>
-                                            @elseif($parcel->status == 3)
-                                                <td>Delivered</td>
-                                            @endif
+                                            <td>{{ App\Models\Parcel::getReadableStatus($parcel->status) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

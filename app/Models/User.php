@@ -64,6 +64,10 @@ class User extends Authenticatable
         return $this->hasMany(Parcel::class, 'courier_id');
     }
 
+    public function parcel_request(){
+        return $this->hasMany(ParcelRequest::class, 'courier_id');
+    }
+
 
     public function isManager(){
 

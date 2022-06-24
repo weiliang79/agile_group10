@@ -23,18 +23,30 @@
                                     <th>Recipient Postcode</th>
                                     <th>Recipient Phone</th>
                                     <th>Date Created</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach($flagged as $parcel)
                                 <tr>
-                                    <td>{{ $parcel->tracking_number }}</td>
-                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
-                                    <td>{{ $parcel->recipient_address }}</td>
-                                    <td>{{ $parcel->recipient_postcode }}</td>
-                                    <td>{{ $parcel->recipient_phone }}</td>
-                                    <td>{{ $parcel->created_at->format('d\/m\/y') }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->tracking_number }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->recipient_address }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->recipient_postcode }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->recipient_phone }}</td>
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">{{ $parcel->created_at->format('d\/m\/y') }}</td>
+                                    @if($parcel->request()->whereIn('status', [1, 2, 3])->count() == 0)
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Not assigned</td>
+                                    @elseif($parcel->request()->first()->status == 1)
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Pending</td>
+                                    @elseif($parcel->request()->first()->status == 2)
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Accepted</td>
+                                    @elseif($parcel->request()->first()->status == 3)
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Declined</td>
+                                    @else
+                                    <td onclick="openURL(this)" data-url="{{ route('manager.tracking_not_pickup_single', ['parcel_id' => $parcel->id]) }}">Error</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -93,3 +105,11 @@
 @include('layout.navbars.footer')
 
 @endsection
+
+@push('js')
+<script>
+    function openURL(item) {
+        window.location = $(item).data('url');
+    }
+</script>
+@endpush
