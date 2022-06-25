@@ -125,6 +125,11 @@ class CourierController extends BaseController
         return view('courier.parcel_request', compact('parcelRequests'));
     }
 
+    public function parcelRequestForm(Request $request)
+    {
+        return view('courier.parcel_request_form', ['request_id' => $request->request_id]);
+    }
+
     public function parcelRequestRespond(Request $request)
     {
         $request->validate([
@@ -139,8 +144,9 @@ class CourierController extends BaseController
             $parcelRequest->status = ParcelRequest::STATUS_ACCEPT;
         } else if ($request->action == 'reject') {
             $parcelRequest->status = ParcelRequest::STATUS_DECLINE;
+            $parcelRequest->reason = $request->reason;
         }
         $parcelRequest->save();
-        return redirect()->back();
+        return redirect()->route('courier.parcel_request_list');
     }
 }

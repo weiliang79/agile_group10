@@ -38,7 +38,7 @@
                                                     href="{{ route('courier.parcel_request_respond', ['action' => 'accept', 'request_id' => $request]) }}">Accept</a>
                                                 <a class="btn btn-danger"
                                                     style="padding: 0.375rem 0.75rem; border: 1px; margin: 4px 2px"
-                                                    href="{{ route('courier.parcel_request_respond', ['action' => 'reject', 'request_id' => $request]) }}">Reject</a>
+                                                    href="{{ route('courier.parcel_request_form', ['request_id' => $request]) }}">Reject</a>
                                             </td>
                                         </tr>
                                     @endforeach
