@@ -18,7 +18,7 @@ class ManagerController extends BaseController
 
     public function index(){
         if(Gate::allows('isManager')){
-            return redirect()->route('manager.tracking_in_transit');
+            return redirect()->route('manager.tracking_not_pickup');
         }
         abort(403);
     }

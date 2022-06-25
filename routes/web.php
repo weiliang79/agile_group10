@@ -51,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/courier/deliver_screen_submit', [CourierController::class, 'deliverScreenSubmit'])->name('courier.deliver_screen_submit');
         Route::post('/courier/deliver_parcel', [CourierController::class, 'deliverParcel'])->name('courier.deliver_parcel');
         Route::get('/courier/tracking_page',[CourierController::class, 'trackingPage'])->name('courier.tracking_page');
+        Route::get('/courier/parcel_request_list',[CourierController::class, 'parcelRequestList'])->name('courier.parcel_request_list');
+        Route::get('/courier/parcel_request_form/{request_id}',[CourierController::class, 'parcelRequestForm'])->name('courier.parcel_request_form');
+        Route::get('/courier/parcel_request_respond',[CourierController::class, 'parcelRequestRespond'])->name('courier.parcel_request_respond');
     });
 
     Route::group(['middleware' => ['can:isManager']], function () {
