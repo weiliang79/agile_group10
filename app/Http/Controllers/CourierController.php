@@ -147,6 +147,6 @@ class CourierController extends BaseController
             $parcelRequest->reason = $request->reason;
         }
         $parcelRequest->save();
-        return redirect()->route('courier.parcel_request_list');
+        return redirect()->route('courier.parcel_request_list')->with('success', 'The request has updated.');
     }
 }
