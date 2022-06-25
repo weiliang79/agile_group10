@@ -65,7 +65,7 @@ class CourierControllerTest extends TestCase
     public function test_parcel_request_list()
     {
         $users = User::courier()->first();
-        $response = $this->actingAs($users)->post(route('courier.parcel_request_list'));
+        $response = $this->actingAs($users)->get(route('courier.parcel_request_list'));
         $response->assertStatus(200);
     }
 }
