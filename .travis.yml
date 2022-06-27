@@ -3,7 +3,7 @@ sudo: required
 dist: trusty
 
 php:
-  -7.3
+  - 7.3
 
 os: linux
 
