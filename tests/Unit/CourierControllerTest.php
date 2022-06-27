@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Parcel;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -24,7 +25,9 @@ class CourierControllerTest extends TestCase
      */
     public function test_index()
     {
-        
+        $user = User::courier()->first();
+        $response = $this->actingAs($user)->get(route('courier.home'));
+        $response->assertStatus(200);
     }
 
     /**
@@ -32,7 +35,11 @@ class CourierControllerTest extends TestCase
      */
     public function test_update_parcel()
     {
-        
+        $user = User::courier()->first();
+        $this->actingAs($user)->get(route('courier.home'));
+        $response = $this->actingAs($user)->post(route('courier.update_parcel'), $this->updateParcelPayload());
+        $response->assertStatus(302);
+        $response->assertRedirect(route('courier.home'));
     }
 
     /**
@@ -67,5 +74,11 @@ class CourierControllerTest extends TestCase
         $users = User::courier()->first();
         $response = $this->actingAs($users)->get(route('courier.parcel_request_list'));
         $response->assertStatus(200);
+    }
+
+    private function updateParcelPayload(){
+        return [
+            "tracking_number" => Parcel::where('status', Parcel::STATUS_NOT_PICK_UP)->first(),
+        ];
     }
 }
