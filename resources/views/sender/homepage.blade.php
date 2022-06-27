@@ -62,7 +62,7 @@
                                 <option value="{{$courier->id}}">{{$courier->first_name}}</option>
                                 @endforeach
                             </select>
-                            
+
                             <div class="pt-1 mb-4">
                                 <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
                             </div>
@@ -74,48 +74,49 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="container-fluid pb-4">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-                <div class="card" style="border-radius: 1rem;">
-                    <div class="d-flex align-items-center">
-                        <div class="card-body p-4 p-lg-5 text-black">
+<div class="container-fluid pb-4" style="background-color: black;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel Status</h5>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">List of Parcel Status</h5>
 
-                            <table class="table align-items-center table-flush showDataTable">
-                                <thead>
-                                    <tr>
-                                        <th>Tracking Number</th>
-                                        <th>Recipient Name</th>
-                                        <th>Recipient Address</th>
-                                        <th>Recipient Phone</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
+                        <table class="table align-items-center table-flush showDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tracking Number</th>
+                                    <th>Recipient Name</th>
+                                    <th>Recipient Address</th>
+                                    <th>Recipient Phone</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    @foreach ($parcels as $parcel)
-                                        <tr>
-                                            <td>{{ $parcel->tracking_number }}</td>
-                                            <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}
-                                            </td>
-                                            <td>{{ $parcel->recipient_address }}</td>
-                                            <td>{{ $parcel->recipient_phone }}</td>
-                                            <td>{{ App\Models\Parcel::getReadableStatus($parcel->status) }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                            <tbody>
+                                @foreach ($parcels as $parcel)
+                                <tr>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}
+                                    </td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_phone }}</td>
+                                    <td>{{ App\Models\Parcel::getReadableStatus($parcel->status) }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
 
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    @include('layout.navbars.footer')
+@include('layout.navbars.footer')
 
 @endsection
