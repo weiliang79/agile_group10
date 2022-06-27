@@ -24,6 +24,8 @@ class LoginControllerTest extends TestCase
      */
     public function test_index()
     {
+        $response = $this->get(route('login'));
+        $response->assertStatus(200);
     }
 
     /**
@@ -31,6 +33,13 @@ class LoginControllerTest extends TestCase
      */
     public function test_process()
     {
+        $cert = [
+            'email' => 'normaluser@isp.com',
+            'password' => 'normaluser123',
+        ];
+        $response = $this->post(route('login.process', $cert));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('normal_user.home'));
     }
 
     /**
@@ -57,5 +66,10 @@ class LoginControllerTest extends TestCase
      */
     public function test_destroy()
     {
+        $user = User::normaluser()->first();
+        $this->actingAs($user)->get(route('normal_user.home'));
+        $response = $this->get(route('logout'));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login'));
     }
 }
