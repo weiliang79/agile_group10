@@ -51,12 +51,12 @@ class SenderController extends BaseController
             'recipient_address' => $request->recipient_address,
             'recipient_postcode' => $request->recipient_postcode,
             'recipient_phone' => $request->recipient_phone,
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
             'courier_id' => $request->courier_id,
         ]);
 
         $parcel->details()->create([
-            'status' => Parcel::STATUS_NOT_DISPATCHED,
+            'status' => Parcel::STATUS_NOT_PICK_UP,
             'message' => 'Parcel details are created.',
         ]);
 
