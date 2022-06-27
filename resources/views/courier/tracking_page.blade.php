@@ -26,16 +26,16 @@
                             </thead>
 
                             <tbody>
-                              
+                                @foreach($notPickUp as $parcel)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_postcode }}</td>
+                                    <td>{{ $parcel->recipient_phone }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y g:i A') }}</td>
                                 </tr>
-                           
+                                @endforeach
                             </tbody>
 
                         </table>
@@ -69,16 +69,16 @@
                             </thead>
 
                             <tbody>
-                                
+                                @foreach($notDispatched as $parcel)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_postcode }}</td>
+                                    <td>{{ $parcel->recipient_phone }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y g:i A') }}</td>
                                 </tr>
-                               
+                               @endforeach
                             </tbody>
 
                         </table>
@@ -112,7 +112,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach($parcels as $parcel)
+                                @foreach($inTransit as $parcel)
                                 <tr>
                                     <td>{{ $parcel->tracking_number }}</td>
                                     <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
@@ -120,7 +120,7 @@
                                     <td>{{ $parcel->recipient_postcode }}</td>
                                     <td>{{ $parcel->created_at->format('d\/m\/y') }}</td>
                                     <td>{{ $parcel->weight }}</td>
-                                    <td>{{ $parcel->elapsed_time }}</td>
+                                    <td>{{ \Carbon\Carbon::now()->diffInHours($parcel->created_at) }} hour/s</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -152,21 +152,21 @@
                                     <th>Recipient Phone</th>
                                     <th>Courier Name</th>
                                     <th>Date Created</th>
-                                    <th>Date Delivered</th>
                                 </tr>
                             </thead>
 
                             <tbody>
+                                @foreach($inDeliver as $parcel)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>        
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_postcode }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y') }}</td>
+                                    <td>{{ $parcel->weight }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y g:i A') }}</td>
+                                </tr> 
+                                @endforeach       
                             </tbody>
 
                         </table>
@@ -201,16 +201,19 @@
                             </thead>
 
                             <tbody>
+                                @foreach($delivered as $parcel)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>        
+                                    
+                                    <td>{{ $parcel->tracking_number }}</td>
+                                    <td>{{ $parcel->recipient_firstname }} {{ $parcel->recipient_lastname }}</td>
+                                    <td>{{ $parcel->recipient_address }}</td>
+                                    <td>{{ $parcel->recipient_postcode }}</td>
+                                    <td>{{ $parcel->created_at->format('d\/m\/y') }}</td>
+                                    <td>{{ $parcel->weight }}</td>
+                                    <td>{{ $parcel->elapsed_time }}</td>
+                                    <td>{{ $parcel->details()->where('status', 5)->first()->created_at->format('d\/m\/y g:i A') }}</td>
+                                </tr>
+                                @endforeach      
                             </tbody>
 
                         </table>
@@ -220,8 +223,6 @@
         </div>
     </div>
 </div>
-
-
 
 @include('layout.navbars.footer')
 

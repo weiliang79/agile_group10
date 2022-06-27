@@ -120,10 +120,32 @@ class CourierController extends BaseController
 
     public function trackingPage(Request $request)
     {
-        $parcels = Parcel::where('courier_id', auth()->user()->id)->where('status', Parcel::STATUS_IN_TRANSIT)->get();
+        $notPickUp = Parcel::where('courier_id', Auth::user()->id)
+            ->where('status', Parcel::STATUS_NOT_PICK_UP)
+            ->orderBy('created_at', 'ASC')
+            ->get();
 
+        $notDispatched = Parcel::where('courier_id', Auth::user()->id)
+            ->where('status', Parcel::STATUS_NOT_DISPATCHED)
+            ->orderBy('created_at', 'ASC')
+            ->get();
 
-        return view('courier.tracking_page', compact('parcels'));
+        $inTransit = Parcel::where('courier_id', auth()->user()->id)
+            ->where('status', Parcel::STATUS_IN_TRANSIT)
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        $inDeliver = Parcel::where('courier_id', Auth::user()->id)
+            ->where('status', Parcel::STATUS_IN_DELIVER)
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        $delivered = Parcel::where('courier_id', Auth::user()->id)
+            ->where('status', Parcel::STATUS_DELIVERED)
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        return view('courier.tracking_page', compact('notPickUp', 'notDispatched', 'inTransit', 'inDeliver', 'delivered'));
     }
 
     public function parcelRequestList()
