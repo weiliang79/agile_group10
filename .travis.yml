@@ -1,17 +1,14 @@
 language: php
-sudo: required
-dist: trusty
 
 php:
-  - 8.1.5
+  - '8.1'
 
 os: linux
 
 before script:
-  - composer install
+  - composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
-  - php artisan jwt:secret
 
 script:
   - vendor/bin/phpunit
