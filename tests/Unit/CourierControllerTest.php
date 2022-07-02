@@ -74,6 +74,7 @@ class CourierControllerTest extends TestCase
         $users = User::courier()->first();
         $response = $this->actingAs($users)->get(route('courier.parcel_request_list'));
         $response->assertStatus(200);
+        $response->assertViewIs('courier.parcel_request');
     }
 
     private function updateParcelPayload(){

@@ -20,31 +20,48 @@ class ManagerControllerTest extends TestCase
     }
 
     /**
-     * ling xiao
+     * lingxiao
      */
     public function test_index()
     {
+        $users = User::manager()->first();
+        $response = $this->actingAs($users)->get(route('manager.home'));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('manager.tracking_not_pickup'));
     }
 
     /**
-     * ling xiao
+     * lingxiao
      */
     public function test_tracking_in_transit()
     {
+        $users = User::manager()->first();
+        $response = $this->actingAs($users)->get(route('manager.tracking_in_transit'));
+        $response->assertStatus(200);
+        $response->assertViewIs('manager.tracking_in_transit');
     }
 
     /**
-     * ling xiao
+     * lingxiao
      */
     public function test_tracking_in_transit_single()
     {
+        $users = User::manager()->first();
+        $courier = User::courier()->first();
+        $response = $this->actingAs($users)->get(route('manager.tracking_in_transit_single', $courier->id));
+        $response->assertStatus(200);
+        $response->assertViewIs('manager.tracking_in_transit_single');
     }
 
     /**
-     * ling xiao
+     * lingxiao
      */
     public function test_tracking_not_dispatch()
     {
+        $users = User::manager()->first();
+        $response = $this->actingAs($users)->get(route('manager.tracking_not_dispatched'));
+        $response->assertStatus(200);
+        $response->assertViewIs('manager.tracking_not_dispatched');
     }
 
     /**
