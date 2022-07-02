@@ -5,10 +5,24 @@ php:
 
 os: linux
 
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE agile_group10'
+
 before script:
+  - composer update
   - composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
+  - php artisan migrate:fresh --seed
 
 script:
-  - vendor/bin/phpunit
+  - php artisan test
+  # jerkins accceptance test
+  - vendor/bin/behat
+  # non functional test
+  - ls vendor/bin
+  - vendor/bin/phplint ./ --exclude=vendor
+  - php phpcpd.phar --fuzzy app
