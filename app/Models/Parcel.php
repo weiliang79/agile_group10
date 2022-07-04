@@ -27,8 +27,8 @@ class Parcel extends Model
         'status',
         'receiver_name',
         'signature',
-        'created_time',
-        'arrived_time',
+        'created_at',
+        'updated_at',
     ];
 
     /**
