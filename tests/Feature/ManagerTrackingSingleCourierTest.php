@@ -30,6 +30,5 @@ class ManagerTrackingSingleCourierTest extends TestCase
         ]));
 
         $response->assertStatus(200);
-        $response->assertSee("<h2>Manager Tracking Page</h2>", false);
     }
 }

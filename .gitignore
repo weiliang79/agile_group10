@@ -14,3 +14,7 @@ yarn-error.log
 /.vscode
 /storage/clockwork
 /reports
+.phplint-cache
+phplint.yml
+build/phplint.cache
+composer.lock

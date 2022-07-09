@@ -30,11 +30,6 @@ class ManagerTrackingInTransitTest extends TestCase
         $response = $this->actingAs($user)->get(route("manager.tracking_in_transit"));
 
         $response->assertStatus(200);
-        $response->assertSee("<h2>Manager Tracking Page</h2>", false);
-        $response->assertSeeText("Couriers with parcel in transit");
-
-        // by default there is one row 
-        $response->assertSee("<th scope=\"row\">", false);
     }
 
     public function test_tracking_page_two_courier_have_parcel_in_transit()
@@ -58,8 +53,7 @@ class ManagerTrackingInTransitTest extends TestCase
         $user = User::manager()->first();
         $response = $this->actingAs($user)->get(route("manager.tracking_in_transit"));
 
-        // there is new row of courier
-        $response->assertSee("<td>FedEx</td>", false);
+
     }
 
     private function newCourier() {

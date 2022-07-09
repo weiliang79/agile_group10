@@ -30,7 +30,6 @@ class ManagerTrackingNotDispatchTest extends TestCase
         $response = $this->actingAs($user)->get(route("manager.tracking_not_dispatched"));
 
         $response->assertStatus(200);
-        $response->assertSee("<h2>Manager Tracking Page</h2>", false);
     }
 
     public function test_earliest_on_top()
@@ -45,7 +44,6 @@ class ManagerTrackingNotDispatchTest extends TestCase
         
         // the new created parcel should show first, and should still have other 3 parcel below it
         $response->assertSeeInOrder(['<td>'.$parcel->tracking_number, '<tr>', '<tr>', '<tr>'], false);
-        $response->assertSee("<h2>Manager Tracking Page</h2>", false);
     }
 
     private function newParcel() {
