@@ -119,4 +119,52 @@ class FeatureContext extends TestCase implements Context
             "courier_id" => User::courier()->first()->id,
         ];
     }
+
+    /**
+     * @Given I am courier
+     */
+    public function iAmCourier()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given I want to track parcel with all detail
+     */
+    public function iWantToTrackParcelWithAllDetail()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see a tracking page
+     */
+    public function iShouldSeeATrackingPage()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given I want to update parcel from not pickup to not dispatched
+     */
+    public function iWantToUpdateParcelFromNotPickupToNotDispatched()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When I browse the homepage
+     */
+    public function iBrowseTheHomepage()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see a form to submit
+     */
+    public function iShouldSeeAFormToSubmit()
+    {
+        throw new PendingException();
+    }
 }
