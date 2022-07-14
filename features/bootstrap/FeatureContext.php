@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Parcel;
+use App\Models\ParcelRequest;
 use App\Models\Role;
 use App\Models\User;
 use Behat\Behat\Tester\Exception\PendingException;
@@ -121,50 +123,62 @@ class FeatureContext extends TestCase implements Context
     }
 
     /**
-     * @Given I am courier
+     * @Given I am a courier
      */
-    public function iAmCourier()
+    public function iAmACourier()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->actingUser = User::courier()->where('id', 4)->first();
     }
 
     /**
-     * @Given I want to track parcel with all detail
+     * @Given I submit the tracking number
      */
-    public function iWantToTrackParcelWithAllDetail()
+    public function iSubmitTheTrackingNumber()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->courier_parcel = Parcel::where('courier_id', $this->actingUser->id)->first();
+        $this->response = $this->actingAs($this->actingUser)->post(route('courier.update_parcel'), ['tracking_number' => $this->courier_parcel->tracking_number]);
     }
 
     /**
-     * @Then I should see a tracking page
+     * @When I browse to the tracking page
      */
-    public function iShouldSeeATrackingPage()
+    public function iBrowseToTheTrackingPage()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->response = $this->actingAs($this->actingUser)->get(route('courier.tracking_page'));
     }
 
     /**
-     * @Given I want to update parcel from not pickup to not dispatched
+     * @Then I should see a parcel with updated status
      */
-    public function iWantToUpdateParcelFromNotPickupToNotDispatched()
+    public function iShouldSeeAParcelWithUpdatedStatus()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->response->assertSeeInOrder(["List of Parcel in Transit", $this->courier_parcel->tracking_number], false);
     }
 
     /**
-     * @When I browse the homepage
+     * @Given I accept the parcel request
      */
-    public function iBrowseTheHomepage()
+    public function iAcceptTheParcelRequest()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->courier_parcel = ParcelRequest::where('courier_id', $this->actingUser->id)->first();
+        $this->response = $this->actingAs($this->actingUser)->get(route('courier.parcel_request_respond', ['action' => 'accept', 'request_id' => $this->courier_parcel->id]));
     }
 
     /**
-     * @Then I should see a form to submit
+     * @Then database should record parcel request accpeted
      */
-    public function iShouldSeeAFormToSubmit()
+    public function databaseShouldRecordParcelRequestAccpeted()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        $this->courier_parcel = ParcelRequest::where('courier_id', $this->actingUser->id)->first();
+        $this->assertDatabaseHas('parcel_requests', [
+            'id' => $this->courier_parcel->id,
+            'status' => ParcelRequest::STATUS_ACCEPT,
+        ]);
     }
 }
