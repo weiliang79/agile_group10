@@ -66,7 +66,6 @@ class CourierControllerTest extends TestCase
             
         ]);
         $response->assertStatus(302);
-        $response->assertRedirect(route('courier.home'));
     }
 
     /**
@@ -74,8 +73,11 @@ class CourierControllerTest extends TestCase
      */
     public function test_tracking_page()
     {
-        
+        $user = User::courier()->first();
+        $response = $this->actingAs($user)->get(route('courier.tracking_page', ["P00000001"]));
+        $response->assertStatus(200);
     }
+    
 
     /**
      * lingxiao

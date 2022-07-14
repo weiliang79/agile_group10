@@ -27,7 +27,9 @@ class SenderControllerTest extends TestCase
      */
     public function test_index()
     {
-
+        $users = User::normaluser()->first();
+        $response = $this->actingAs($users)->post(route('normal_user.home'));
+        $response->assertStatus(405);
     }
 
     /**
@@ -45,6 +47,9 @@ class SenderControllerTest extends TestCase
      */
     public function test_genarate_tracking_number()
     {
+        $controller = new SenderController;
+        $this->assertEquals('P00000001', $controller->generateTrackingNumber(1));
+
     }
 
     private function payload()
@@ -62,9 +67,5 @@ class SenderControllerTest extends TestCase
         ];
     }
 
-    public function test_generate_tracking_number()
-    {
-        $controller = new SenderController;
-        $this->assertEquals('P00000001', $controller->generateTrackingNumber(1));
-    }
+
 }
