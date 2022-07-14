@@ -78,9 +78,12 @@ class ManagerNotPickUpTest extends TestCase
             //test assgined parcel are changed with manager role
             $response = $this->actingAs($manager)->get(route('manager.tracking_not_pickup'));
             $response->assertStatus(200);
-            //dd($response);
-            //$response->assertSee($parcel->tracking_number.'<td>', false);
-            //$response->assertSee('Flagged List of parcel not pickup');
+            $response->assertSeeInOrder([$parcel->tracking_number, 'Pending'], false);
+
+            //test assigned parcel are changed with courier role
+            $response = $this->actingAs($courier)->get(route('courier.parcel_request_list'));
+            $response->assertStatus(200);
+            $response->assertSee('<td>'.$parcel->tracking_number.'</td>', false);
       }
 
       private function newParcelFlagged()
