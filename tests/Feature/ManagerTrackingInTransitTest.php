@@ -28,11 +28,11 @@ class ManagerTrackingInTransitTest extends TestCase
         // get the first manager in database
         $user = User::manager()->first();
         $response = $this->actingAs($user)->get(route("manager.tracking_in_transit"));
-
         $response->assertStatus(200);
+        $response->assertViewIs('manager.tracking_in_transit');
     }
 
-    public function test_tracking_page_two_courier_have_parcel_in_transit()
+    public function test_tracking_page_multiple_courier_have_parcel_in_transit()
     {
         // new courier
         $newcourier = User::create($this->newCourier());
@@ -52,8 +52,8 @@ class ManagerTrackingInTransitTest extends TestCase
 
         $user = User::manager()->first();
         $response = $this->actingAs($user)->get(route("manager.tracking_in_transit"));
-
-
+        $response->assertSee('FedEx');
+        $response->assertSee('support@fedex.com');
     }
 
     private function newCourier() {
