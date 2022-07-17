@@ -59,6 +59,10 @@ class LoginControllerTest extends TestCase
      */
     public function test_register_process()
     {
+        $user = User::manager()->first();
+        $response = $this->get(route('register'));
+        $response->assertStatus(200);
+        $response->assertViewIs('auth.register');
     }
 
     /**
