@@ -235,4 +235,58 @@ class FeatureContext extends TestCase implements Context
         //throw new PendingException();
         $this->assertTrue(true);
     }
+
+    /**
+     * @Given I want to track parcel with all detail
+     */
+    public function iWantToTrackParcelWithAllDetail()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Then I should see a tracking page
+     */
+    public function iShouldSeeATrackingPage()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Given I want to update parcel from not pickup to not dispatched
+     */
+    public function iWantToUpdateParcelFromNotPickupToNotDispatched()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @When I browse the homepage
+     */
+    public function iBrowseTheHomepage()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Then I should see a form to submit
+     */
+    public function iShouldSeeAFormToSubmit()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Given I am courier
+     */
+    public function iAmCourier()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
 }

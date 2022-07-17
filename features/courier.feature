@@ -16,3 +16,15 @@ Feature: Update parcel status
     Given I am a courier
     And I accept the parcel request
     Then database should record parcel request accpeted
+
+  Scenario: able to track tracking number
+    Given I am a courier
+    And I want to track parcel with all detail
+    When I browse to the homepage
+    Then I should see a tracking page
+
+  Scenario: able to update parcel
+    Given I am a courier
+    And I want to update parcel from not pickup to not dispatched
+    When I browse the homepage
+    Then I should see a form to submit
