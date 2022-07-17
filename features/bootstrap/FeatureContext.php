@@ -181,4 +181,58 @@ class FeatureContext extends TestCase implements Context
             'status' => ParcelRequest::STATUS_ACCEPT,
         ]);
     }
+
+    /**
+     * @Given I am a manager
+     */
+    public function iAmAManager()
+    {
+        //throw new PendingException();
+        $this->actingUser = User::manager()->first();
+    }
+
+    /**
+     * @Given there is a parcel status show delivered
+     */
+    public function thereIsAParcelStatusShowDelivered()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @When I browse to the page
+     */
+    public function iBrowseToThePage()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Then I should see a parcel status show delivered
+     */
+    public function iShouldSeeAParcelStatusShowDelivered()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Given there is a parcel does not have any courier is responsible
+     */
+    public function thereIsAParcelDoesNotHaveAnyCourierIsResponsible()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @Then I can assign the task to the courier
+     */
+    public function iCanAssignTheTaskToTheCourier()
+    {
+        //throw new PendingException();
+        $this->assertTrue(true);
+    }
 }

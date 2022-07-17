@@ -8,9 +8,9 @@ Feature: Submit new parcel request
 
   Scenario: must have manager to check the status
     Given I am a manager
-    And there is a parcel status show sending
+    And there is a parcel status show delivered
     When I browse to the page
-    Then I should see a parcel status show sending
+    Then I should see a parcel status show delivered
 
   Scenario: must have manager to assign the task for courier
     Given I am a manager
