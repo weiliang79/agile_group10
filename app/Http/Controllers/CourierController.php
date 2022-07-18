@@ -64,8 +64,17 @@ class CourierController extends BaseController
             $parcel->save();
             return redirect()->back()->with('success', 'The parcel ' . $parcel->tracking_number . ' has updated to in-transit status.');
         } else if ($parcel->status == Parcel::STATUS_IN_TRANSIT) {
-            //TODO: change status from in-transit to delivered
+            //TODO: change status from in-transit to in-deliver
             //return view('courier.delivery_screen')->with('tracking_number', $parcel->tracking_number);
+            //return redirect()->route('courier.deliver_screen', compact('parcel'));
+            $parcel->status = Parcel::STATUS_IN_DELIVER;
+            $parcel->details()->create([
+                'status' => Parcel::STATUS_IN_DELIVER,
+                'message' => 'Parcel is in delivering.',
+            ]);
+            $parcel->save();
+            return redirect()->back()->with('success', 'The parcel '. $parcel->tracking_number . ' has updated to in-deliver status.');
+        } else if ($parcel->status == Parcel::STATUS_IN_DELIVER) {
             return redirect()->route('courier.deliver_screen', compact('parcel'));
         } else if ($parcel->status == Parcel::STATUS_DELIVERED) {
             return redirect()->back()->with('error', 'The parcel ' . $parcel->tracking_number . ' are delivered.');
