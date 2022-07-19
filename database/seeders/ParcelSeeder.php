@@ -6,7 +6,7 @@ use App\Models\Parcel;
 use App\Models\ParcelDetails;
 use App\Models\ParcelRequest;
 use Carbon\Carbon;
-use Faker\Generator;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class ParcelSeeder extends Seeder
@@ -23,7 +23,7 @@ class ParcelSeeder extends Seeder
         // User::factory(10)->create();
 
         //init
-        $this->faker = app(Generator::class);
+        $this->faker = Faker::create();
 
         // 01
         Parcel::factory()->create([
@@ -259,6 +259,9 @@ class ParcelSeeder extends Seeder
 
     private function parcel_detail_delivered($parcel_id)
     {
+        $parcel = Parcel::find($parcel_id);
+        $parcel->receiver_name = $this->faker->name();
+        $parcel->save();
         ParcelDetails::create([
             'parcel_id' => $parcel_id,
             'status' => Parcel::STATUS_DELIVERED,
